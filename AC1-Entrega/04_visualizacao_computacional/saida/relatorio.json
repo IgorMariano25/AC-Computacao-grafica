@@ -1,0 +1,62 @@
+{
+  "scivis": {
+    "dimensoes": [
+      208,
+      248,
+      201
+    ],
+    "n_voxels": 10368384,
+    "espacamento": [
+      0.723,
+      0.723,
+      1.0
+    ],
+    "faixa": [
+      0,
+      174
+    ],
+    "isosuperficie": {
+      "isovalor_pele": 62,
+      "isovalor_osso": 108,
+      "triangulos_pele": 1226157,
+      "triangulos_osso": 176354
+    },
+    "dvr": {
+      "pontos_controle": [
+        0,
+        34,
+        69,
+        104,
+        139,
+        174
+      ],
+      "tf_osso": [
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.6,
+        0.95
+      ],
+      "tf_completa": [
+        0.0,
+        0.0,
+        0.01,
+        0.06,
+        0.7,
+        0.98
+      ]
+    }
+  },
+  "infovis": {
+    "n_paises": 142,
+    "variaveis": [
+      "country",
+      "pop",
+      "continent",
+      "lifeExp",
+      "gdpPercap"
+    ],
+    "correlacao_logPIB_expVida": 0.809
+  }
+}

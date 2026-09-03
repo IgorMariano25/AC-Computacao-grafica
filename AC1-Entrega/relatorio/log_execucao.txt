@@ -1,0 +1,276 @@
+==============================================================================
+Área 1 — Síntese de Imagens
+arquivo: 01_sintese_imagens\sintese_opengl.py
+duração: 0.7 s | código de saída: 0
+==============================================================================
+==========================================================================
+AREA 1 - SINTESE DE IMAGENS  |  ModernGL / OpenGL 3.3 Core
+==========================================================================
+
+[1] MODELAGEM  - arquivo .......: dragao.obj  (2391 KB)
+    vertices ...................: 19,895
+[2] POLIGONIZACAO - triangulos .: 37,986
+    normais calculadas em ......: 100 ms
+
+    GL_VERSION .................: 3.3.0 - Build 32.0.101.7084
+    GL_RENDERER ................: Intel(R) Iris(R) Xe Graphics
+    VBO enviado a GPU ..........: 466 KB
+
+[3] TRANSFORMACOES - matrizes Model, View e Projection montadas (4x4)
+    camera (olho) ..............: (31.82, 17.82, 36.06)
+    ajuste de enquadramento ....: fator 2.05x em coordenadas de recorte
+[4-7] 1. Nuvem de vertices (modelo geometrico)          2.0 ms  -> saida/a_vertices.png
+[4-7] 2. Malha de triangulos (wireframe)                3.6 ms  -> saida/b_wireframe.png
+[4-7] 3. Rasterizacao + z-buffer (sem luz)              0.9 ms  -> saida/c_flat.png
+[4-7] 4. Shading de Phong (amb + dif + esp)             0.9 ms  -> saida/d_phong.png
+
+--------------------------------------------------------------------------
+BALANCO DA AREA (entrada -> saida)
+--------------------------------------------------------------------------
+  ENTRADA : descricao VETORIAL -> 19,895 vertices / 37,986 triangulos
+  SAIDA   : imagem MATRICIAL   -> 900x900 = 810,000 pixels
+  A conversao vetorial -> matricial e a RASTERIZACAO, executada na GPU.
+  Nenhuma imagem foi lida como entrada: a imagem foi SINTETIZADA.
+
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\01_sintese_imagens\saida
+
+
+==============================================================================
+Área 2 — Processamento de Imagens
+arquivo: 02_processamento_imagens\processamento_opencv.py
+duração: 4.2 s | código de saída: 0
+==============================================================================
+==========================================================================
+ÁREA 2 - PROCESSAMENTO DE IMAGENS  |  OpenCV 4.14.0
+==========================================================================
+
+[ENTRADA] fruits.jpg: 512x480 pixels, 3 canais, 720 KB em memória
+
+(A) AQUISIÇÃO — amostragem (resolução) e quantização (gradação tonal)
+    amostragem 1/8  ->  64x 60 (3,840 pixels)
+    amostragem 1/32 ->  16x 15 (240 pixels)
+    quantização 16 níveis -> 4 bits/canal (de 8)
+    quantização  4 níveis -> 2 bits/canal (de 8)
+    quantização  2 níveis -> 1 bits/canal (de 8)
+
+(B) REALCE — conversão para tons de cinza e equalização de histograma
+    cinza            média=  88.7  desvio= 45.8  faixa=[  0,238]
+    baixo contraste  média=  59.4  desvio= 20.6  faixa=[ 20,127]
+    equalizada       média= 129.0  desvio= 74.1  faixa=[  0,255]
+    CLAHE            média=  81.1  desvio= 33.4  faixa=[ 10,188]
+
+(C) RESTAURAÇÃO — ruído sal-e-pimenta e filtros de suavização
+    PSNR ruidosa         = 16.11 dB
+    PSNR média 5x5       = 26.49 dB
+    PSNR gaussiano 5x5   = 26.26 dB
+    PSNR mediana 3x3     = 35.51 dB
+    -> a mediana vence porque é um filtro NÃO-LINEAR, imune a valores extremos
+
+(D) CONVOLUÇÃO — máscaras de Sobel e Laplaciano aplicadas na vizinhança 3x3
+    máscara Sobel_x = [[-1 0 1]   máscara Sobel_y = [[-1 -2 -1]
+                       [-2 0 2]                      [ 0  0  0]
+                       [-1 0 1]]                     [ 1  2  1]]
+    pixels de borda detectados pelo Canny: 6,057 (2.46% da imagem)
+
+(E) SEGMENTAÇÃO — limiarização de Otsu e morfologia matemática
+    imagem de entrada: smarties.png (413x356) — histograma bimodal
+    limiar escolhido automaticamente por Otsu: T = 177
+    pixels classificados como objeto: 19.7%
+    contornos após a morfologia: 11 (objetos encostados ainda saem grudados)
+    watershed sobre a transformada de distância: 15 objetos separados
+
+(F) EXTRAÇÃO DE ATRIBUTOS — contornos das regiões segmentadas
+    região  1: área= 2,115 px  perímetro= 173.4 px  circularidade=0.884
+    região  2: área= 2,059 px  perímetro= 168.9 px  circularidade=0.908
+    região  3: área= 2,094 px  perímetro= 171.2 px  circularidade=0.898
+    região  4: área= 1,981 px  perímetro= 167.4 px  circularidade=0.888
+    região  5: área= 2,338 px  perímetro= 191.1 px  circularidade=0.805
+    região  6: área= 2,072 px  perímetro= 170.9 px  circularidade=0.892
+    região  7: área= 1,996 px  perímetro= 168.3 px  circularidade=0.886
+    região  8: área= 2,110 px  perímetro= 172.6 px  circularidade=0.890
+    região  9: área= 1,966 px  perímetro= 177.3 px  circularidade=0.786
+    região 10: área= 2,292 px  perímetro= 180.3 px  circularidade=0.887
+    região 11: área= 2,243 px  perímetro= 178.0 px  circularidade=0.889
+    região 12: área=   649 px  perímetro= 106.0 px  circularidade=0.726
+    região 13: área=   557 px  perímetro= 108.8 px  circularidade=0.592
+    região 14: área= 2,203 px  perímetro= 176.5 px  circularidade=0.889
+    -> 14 regiões; área média = 1,905 px (desvio 543); circularidade média = 0.844
+    OBS.: são ATRIBUTOS GEOMÉTRICOS. O sistema não sabe o QUE é cada objeto —
+          nomear o objeto já é tarefa de Visão Computacional (área 3).
+
+--------------------------------------------------------------------------
+BALANÇO DA ÁREA (entrada -> saída)
+--------------------------------------------------------------------------
+  ENTRADA : imagem MATRICIAL 512x480x3
+  SAÍDA   : imagem MATRICIAL 512x480 (mesma natureza de dado)
+  A informação é sempre reorganizada dentro da própria grade de pixels.
+  O sistema não sabe que são frutas — só conhece intensidades e vizinhanças.
+
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\02_processamento_imagens\saida
+
+
+==============================================================================
+Área 3 — Visão Computacional
+arquivo: 03_visao_computacional\visao_yolo.py
+duração: 8.2 s | código de saída: 0
+==============================================================================
+==========================================================================
+ÁREA 3 - VISÃO COMPUTACIONAL  |  Ultralytics YOLOv8n (COCO, 80 classes)
+==========================================================================
+
+PASSO 1 — AQUISIÇÃO
+    imagem .....................: bus.jpg
+    dimensões ..................: 810x1080x3 = 2,624,400 bytes brutos
+
+PASSO 2 — PRÉ-PROCESSAMENTO (adequar a imagem à entrada da rede)
+    letterbox ..................: 810x1080 -> 640x640 (escala 0.593, borda dx=80 dy=0)
+    BGR -> RGB, HWC -> NCHW ....: tensor (1, 3, 640, 640)
+    normalização ...............: uint8 [0,255] -> float32 [0,1] (mín 0.00, máx 1.00)
+
+PASSOS 3 e 5 — PROCESSAMENTO / EXTRAÇÃO DE CARACTERÍSTICAS
+    arquitetura ................: YOLOv8n, 23 blocos
+    parâmetros treinados .......: 3,157,200
+    classes reconhecíveis ......: 80 (conjunto COCO)
+    passagem direta (CPU) ......: 116 ms
+    mapas de características produzidos automaticamente pela rede:
+      bloco_0    (1, 16, 320, 320)   (16 filtros de 320x320)
+      bloco_2    (1, 32, 160, 160)   (32 filtros de 160x160)
+      bloco_4    (1, 64, 80, 80)   (64 filtros de 80x80)
+      bloco_6    (1, 128, 40, 40)   (128 filtros de 40x40)
+
+PASSOS 4 e 6 — ANÁLISE DE IMAGEM / RECONHECIMENTO DE PADRÕES
+    inferência completa (com NMS): 1465 ms
+    supressão de não-máximos ....: IoU 0.45, confiança mínima 0.25
+
+    SAÍDA DA ÁREA — descrição simbólica da cena (6 objetos):
+    #  classe       confiança   caixa (x1,y1,x2,y2)              área px
+    -------------------------------------------------------------------
+    1  bus              0.873   23,231,805,757                   411,059
+    2  person           0.866   49,399,245,903                    99,214
+    3  person           0.853   670,392,810,877                   67,999
+    4  person           0.825   222,406,345,858                   55,769
+    5  person           0.261   0,550,63,873                      20,346
+    6  stop sign        0.255   0,254,33,325                       2,288
+
+    Interpretação da cena: 1x bus, 4x person, 1x stop sign
+
+CONTRASTE — abordagem clássica: HOG + SVM (Dalal & Triggs, 2005)
+    descritor de características ESCRITO À MÃO, não aprendido
+    tempo ......................: 739 ms
+    pessoas detectadas .........: 3 (o HOG só sabe procurar UMA classe: pedestres)
+    YOLO, na mesma imagem ......: 4 pessoas + 2 objetos de outras classes
+
+--------------------------------------------------------------------------
+BALANÇO DA ÁREA (entrada -> saída)
+--------------------------------------------------------------------------
+  ENTRADA : imagem MATRICIAL 810x1080x3 = 2,624,400 bytes
+  SAÍDA   : DESCRIÇÃO SIMBÓLICA — 6 registros, 974 bytes de JSON
+  Redução de 2,694x no volume de dados: a área
+  troca pixels por SIGNIFICADO. A imagem anotada é só para o humano ver;
+  o produto real da Visão Computacional é a lista de objetos acima.
+
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\03_visao_computacional\saida
+
+
+==============================================================================
+Área 4 — Visualização Computacional
+arquivo: 04_visualizacao_computacional\visualizacao_vtk.py
+duração: 7.3 s | código de saída: 0
+==============================================================================
+==========================================================================
+ÁREA 4 - VISUALIZAÇÃO COMPUTACIONAL
+==========================================================================
+VTK 9.6 | PyVista 0.48.4
+
+==========================================================================
+PARTE A - VISUALIZAÇÃO CIENTÍFICA  |  VTK/PyVista, tomografia de joelho
+==========================================================================
+
+[DADO DE ENTRADA] campo escalar 3D amostrado em grade regular
+    dimensões da grade .........: 208 x 248 x 201
+    total de voxels ............: 10,368,384
+    espaçamento (mm) ...........: (0.723, 0.723, 1.0)
+    faixa de intensidade .......: 0 a 174
+    memória do campo ...........: 9.9 MB
+    -> NÃO é uma imagem e NÃO é uma malha: é uma FUNÇÃO f(x,y,z) medida.
+
+[A1] CORTES ORTOGONAIS — mapeia intensidade para cor, sem geometria 3D
+    -> saida/A1_cortes_ortogonais.png
+
+[A2] ISOSUPERFÍCIE — extrai geometria do campo e cai no pipeline da Área 1
+    algoritmo ..................: marching cubes (vtkContourFilter)
+    isovalor 62 (tecido mole) -> 1,226,157 triângulos
+    isovalor 108 (osso) ........ -> 176,354 triângulos
+    -> a partir daqui é rasterização comum: MALHA -> IMAGEM (Área 1)
+    -> saida/A2_isosuperficie.png
+
+[A3] RENDERING VOLUMÉTRICO DIRETO — ray casting, SEM extrair geometria
+    técnica citada no slide 54 do material da disciplina
+    o raio de cada pixel atravessa o volume acumulando cor e opacidade;
+    quem decide o que aparece é a FUNÇÃO DE TRANSFERÊNCIA (valor -> opacidade)
+    pontos de controle .........: 0  34  69  104  139  174
+    opacidade (realce do osso) .: [0.0, 0.0, 0.0, 0.05, 0.6, 0.95]
+    opacidade (osso + tecido) ..: [0.0, 0.0, 0.01, 0.06, 0.7, 0.98]
+    -> saida/A3_dvr_osso.png
+    -> saida/A3_dvr_completo.png
+
+    -> saida/A_scivis_montagem.png (comparativo das três técnicas)
+
+    BALANÇO SciVis: entrada = 10,368,384 voxels (9.9 MB) -> saída = imagem 900x900
+    A geometria vem do DOMÍNIO (a anatomia). O projetista escolhe apenas
+    o MAPEAMENTO visual (cor e opacidade), não a forma.
+
+==========================================================================
+PARTE B - VISUALIZAÇÃO DE INFORMAÇÃO  |  Gapminder 2007 (slide 62)
+==========================================================================
+
+[DADO DE ENTRADA] tabela sem qualquer geometria associada
+    registros ..................: 142 países
+    variáveis ..................: ['country', 'pop', 'continent', 'lifeExp', 'gdpPercap']
+    memória ....................: 19.0 KB
+    -> um país NÃO tem posição (x,y) natural: ela precisa ser INVENTADA.
+
+[MAPEAMENTO VISUAL escolhido pelo projetista]
+    posição X          <- PIB per capita (US$, escala logarítmica)
+    posição Y          <- expectativa de vida (anos)
+    área do círculo    <- população
+    cor                <- continente (variável categórica)
+
+    -> saida/B_infovis_gapminder.png
+
+    Leitura possibilitada pelo gráfico:
+      correlação log(PIB) x expectativa de vida = 0.809
+      expectativa de vida: 39.6 a 82.6 anos
+      Africa    n= 52  vida média= 54.8 anos  PIB mediano=US$     1,452
+      Americas  n= 25  vida média= 73.6 anos  PIB mediano=US$     8,948
+      Asia      n= 33  vida média= 70.7 anos  PIB mediano=US$     4,471
+      Europe    n= 30  vida média= 77.6 anos  PIB mediano=US$    28,054
+      Oceania   n=  2  vida média= 80.7 anos  PIB mediano=US$    29,810
+
+    BALANÇO InfoVis: entrada = 142 linhas x 5 colunas -> saída = 1 imagem
+    A geometria é ARBITRÁRIA (convenção). Ler o gráfico exige treino:
+    é preciso saber que o eixo X é logarítmico e que a ÁREA (não o raio)
+    codifica a população.
+
+--------------------------------------------------------------------------
+BALANÇO DA ÁREA (entrada -> saída)
+--------------------------------------------------------------------------
+  ENTRADA : DADOS que não são imagem nem modelo geométrico de um objeto
+            (campo escalar medido, tabela de indicadores)
+  SAÍDA   : imagem cujo propósito é a ANÁLISE, não o realismo
+  A área compartilha o motor de renderização com a Área 1, mas o produto
+  é entendimento: a pergunta não é 'ficou bonito?' e sim 'ficou legível?'.
+
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\04_visualizacao_computacional\saida
+
+
+==============================================================================
+Quadro comparativo
+arquivo: 00_comparativo\gerar_comparativo.py
+duração: 1.6 s | código de saída: 0
+==============================================================================
+Gerando quadro comparativo das quatro áreas...
+-> saida/painel_areas.png
+-> saida/diagrama_areas.png
+Arquivos em: E:\AC1-Computação-Gráfica\AC1-Entrega\00_comparativo\saida
+

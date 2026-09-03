@@ -1,0 +1,1179 @@
+<title>Quatro Áreas da Computação Visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600;700&display=swap">
+
+<style>
+:root {
+  --ground:      #eceef2;
+  --surface:     #ffffff;
+  --surface-2:   #f4f6f9;
+  --ink:         #171b23;
+  --ink-soft:    #3d4553;
+  --muted:       #5d6674;
+  --rule:        #d3d8e1;
+  --rule-soft:   #e3e7ed;
+
+  --a1: #c4661a;   --a1-tint: #fbf1e7;
+  --a2: #2963b8;   --a2-tint: #e9f0fb;
+  --a3: #18815a;   --a3-tint: #e6f4ee;
+  --a4: #834aab;   --a4-tint: #f3ecf9;
+
+  --term-bg:   #12141a;
+  --term-ink:  #ccd3e0;
+  --term-dim:  #7d8798;
+  --term-hi:   #e8b478;
+
+  --shadow: 0 1px 2px rgba(23,27,35,.05), 0 8px 24px -12px rgba(23,27,35,.18);
+
+  --f-display: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --f-body:    "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:    "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:    #0e1015;
+    --surface:   #181c24;
+    --surface-2: #1f242e;
+    --ink:       #e7eaf0;
+    --ink-soft:  #c2c9d4;
+    --muted:     #949dab;
+    --rule:      #2c323d;
+    --rule-soft: #232833;
+
+    --a1: #e8873a;   --a1-tint: #2a1d12;
+    --a2: #5f9cef;   --a2-tint: #141d2b;
+    --a3: #3fbb87;   --a3-tint: #10241c;
+    --a4: #b47ad6;   --a4-tint: #211630;
+
+    --term-bg:  #05070b;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground:    #0e1015;
+  --surface:   #181c24;
+  --surface-2: #1f242e;
+  --ink:       #e7eaf0;
+  --ink-soft:  #c2c9d4;
+  --muted:     #949dab;
+  --rule:      #2c323d;
+  --rule-soft: #232833;
+
+  --a1: #e8873a;   --a1-tint: #2a1d12;
+  --a2: #5f9cef;   --a2-tint: #141d2b;
+  --a3: #3fbb87;   --a3-tint: #10241c;
+  --a4: #b47ad6;   --a4-tint: #211630;
+
+  --term-bg:  #05070b;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- grade editorial: coluna de texto + faixas largas ---------- */
+.folha {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1.1rem, 1fr)
+    [wide-start] minmax(0, 1.4fr)
+    [text-start] min(68ch, 100% - 2.2rem)
+    [text-end]   minmax(0, 1.4fr)
+    [wide-end]   minmax(1.1rem, 1fr)
+    [full-end];
+  row-gap: 1.15rem;
+  padding-bottom: 5rem;
+}
+.folha > * { grid-column: text; }
+.folha > figure,
+.folha > .larga { grid-column: wide; }
+.folha > .plena  { grid-column: full; }
+
+/* ---------- cabeçalho ---------- */
+.capa {
+  grid-column: full;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  padding: 3.4rem 1.5rem 2.6rem;
+  margin-bottom: 2rem;
+}
+.capa-interna {
+  max-width: 62rem; margin: 0 auto;
+  display: grid; gap: 1.15rem;
+}
+.trilha {
+  font-family: var(--f-mono);
+  font-size: .74rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5.2vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -.018em;
+  margin: 0;
+  text-wrap: balance;
+}
+h1 .quatro {
+  display: block;
+  font-size: .42em;
+  font-family: var(--f-mono);
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: var(--muted);
+  margin-top: .85rem;
+}
+h1 .quatro b { font-weight: 600; }
+h1 .quatro .s1 { color: var(--a1); }
+h1 .quatro .s2 { color: var(--a2); }
+h1 .quatro .s3 { color: var(--a3); }
+h1 .quatro .s4 { color: var(--a4); }
+
+.resumo {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin: 0;
+}
+.ficha {
+  display: flex; flex-wrap: wrap; gap: .5rem 2.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule-soft);
+  font-size: .87rem;
+  color: var(--muted);
+}
+.ficha b { color: var(--ink-soft); font-weight: 600; }
+
+/* ---------- texto ---------- */
+h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.5rem, 3vw, 1.95rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.012em;
+  margin: 2.9rem 0 .3rem;
+  text-wrap: balance;
+}
+h3 {
+  font-family: var(--f-body);
+  font-size: 1.06rem; font-weight: 600;
+  letter-spacing: .002em;
+  margin: 2rem 0 .1rem;
+}
+h4 {
+  font-family: var(--f-mono);
+  font-size: .76rem; font-weight: 600;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--muted);
+  margin: 1.6rem 0 -.35rem;
+}
+p { margin: 0; }
+a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--a2); outline-offset: 3px; border-radius: 2px;
+}
+strong { font-weight: 600; }
+code {
+  font-family: var(--f-mono); font-size: .875em;
+  background: var(--surface-2);
+  border: 1px solid var(--rule-soft);
+  border-radius: 3px;
+  padding: .06em .34em;
+}
+ul, ol { margin: 0; padding-left: 1.3rem; display: grid; gap: .42rem; }
+li::marker { color: var(--muted); }
+
+/* ---------- abertura de cada área ---------- */
+.area {
+  grid-column: wide;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1.5rem;
+  align-items: baseline;
+  margin: 4.2rem 0 .6rem;
+  padding-top: 1.9rem;
+  border-top: 2px solid var(--cor);
+}
+.area .num {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 8vw, 4.6rem);
+  font-weight: 700;
+  line-height: .8;
+  color: var(--cor);
+  font-variant-numeric: tabular-nums;
+}
+.area h2 { margin: 0; }
+.area .sub {
+  grid-column: 2;
+  font-family: var(--f-mono);
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: .55rem;
+}
+.area .fluxo {
+  grid-column: 2;
+  margin-top: .9rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+  font-family: var(--f-mono); font-size: .78rem;
+}
+.fluxo .caixa {
+  background: var(--tint); color: var(--cor);
+  border: 1px solid var(--cor); border-radius: 3px;
+  padding: .2rem .6rem; font-weight: 600;
+}
+.fluxo .seta { color: var(--cor); font-weight: 600; }
+
+.a1 { --cor: var(--a1); --tint: var(--a1-tint); }
+.a2 { --cor: var(--a2); --tint: var(--a2-tint); }
+.a3 { --cor: var(--a3); --tint: var(--a3-tint); }
+.a4 { --cor: var(--a4); --tint: var(--a4-tint); }
+
+/* ---------- citação do material da disciplina ---------- */
+blockquote {
+  margin: 1.5rem 0 .4rem;
+  padding: .1rem 0 .1rem 1.15rem;
+  border-left: 3px solid var(--rule);
+  color: var(--ink-soft);
+  font-family: var(--f-display);
+  font-size: 1.03rem;
+  font-style: italic;
+}
+blockquote cite {
+  display: block; margin-top: .55rem;
+  font-family: var(--f-mono); font-style: normal;
+  font-size: .74rem; color: var(--muted);
+}
+
+/* ---------- fichas de aplicação ---------- */
+.ficha-app {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-left: 3px solid var(--cor, var(--rule));
+  border-radius: 4px;
+  padding: 1.05rem 1.25rem;
+  margin: 1.4rem 0 .5rem;
+  display: grid; gap: .5rem;
+  font-size: .91rem;
+}
+.ficha-app div { display: grid; grid-template-columns: 8.5rem 1fr; gap: .2rem .9rem; }
+.ficha-app dt, .ficha-app .rot {
+  font-family: var(--f-mono); font-size: .73rem; font-weight: 500;
+  letter-spacing: .07em; text-transform: uppercase;
+  color: var(--muted); padding-top: .18em;
+}
+.ficha-app .val { color: var(--ink); overflow-wrap: anywhere; }
+@media (max-width: 560px) {
+  .ficha-app div { grid-template-columns: 1fr; }
+}
+
+/* ---------- terminal ---------- */
+.terminal {
+  background: var(--term-bg);
+  border: 1px solid #262c38;
+  border-radius: 5px;
+  margin: 1.5rem 0 .5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.terminal .barra {
+  font-family: var(--f-mono); font-size: .7rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--term-dim);
+  padding: .5rem .95rem;
+  border-bottom: 1px solid #262c38;
+}
+.terminal pre {
+  margin: 0; padding: .95rem;
+  overflow-x: auto;
+  font-family: var(--f-mono);
+  font-size: .775rem; line-height: 1.62;
+  color: var(--term-ink);
+  tab-size: 2;
+}
+.terminal pre b { color: var(--term-hi); font-weight: 500; }
+.terminal pre i { color: var(--term-dim); font-style: normal; }
+
+/* ---------- tabelas ---------- */
+.tabela { overflow-x: auto; margin: 1.5rem 0 .4rem; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: .89rem;
+  font-variant-numeric: tabular-nums;
+}
+caption {
+  caption-side: top; text-align: left;
+  font-family: var(--f-mono); font-size: .72rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); padding-bottom: .6rem;
+}
+th, td {
+  padding: .48rem .8rem .48rem 0;
+  text-align: left;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+}
+thead th {
+  font-family: var(--f-mono); font-size: .71rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td.num, th.num { text-align: right; padding-right: 1.4rem; font-family: var(--f-mono); }
+td.destaque { font-weight: 600; color: var(--a3); }
+.pastilha {
+  display: inline-block;
+  font-family: var(--f-mono); font-size: .7rem; font-weight: 600;
+  padding: .1rem .45rem; border-radius: 3px;
+  background: var(--tint); color: var(--cor);
+  border: 1px solid var(--cor);
+}
+
+/* ---------- figuras ---------- */
+figure { margin: 1.9rem 0 .6rem; display: grid; gap: .65rem; }
+figure img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--surface);
+}
+figcaption {
+  font-size: .84rem; line-height: 1.55;
+  color: var(--muted);
+  max-width: 72ch;
+}
+figcaption b { color: var(--ink-soft); font-weight: 600; }
+
+/* ---------- caixa de conclusão por área ---------- */
+.balanco {
+  grid-column: wide;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--cor);
+  border-radius: 4px;
+  padding: 1.3rem 1.45rem;
+  margin: 2rem 0 .5rem;
+  display: grid; gap: .7rem;
+  box-shadow: var(--shadow);
+}
+.balanco .rot {
+  font-family: var(--f-mono); font-size: .72rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--cor);
+}
+.balanco ul { gap: .5rem; }
+.balanco .numero {
+  font-family: var(--f-mono); font-weight: 600; color: var(--ink);
+}
+
+/* ---------- nota ---------- */
+.nota {
+  background: var(--surface-2);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: .85rem 1.1rem;
+  font-size: .89rem;
+  color: var(--ink-soft);
+  margin: 1.4rem 0 .4rem;
+}
+.nota b { color: var(--ink); }
+
+/* ---------- rodapé ---------- */
+.rodape {
+  grid-column: full;
+  margin-top: 4.5rem;
+  padding: 2.4rem 1.5rem 1rem;
+  border-top: 1px solid var(--rule);
+  background: var(--surface);
+}
+.rodape-interna { max-width: 62rem; margin: 0 auto; display: grid; gap: 1.1rem; }
+.arvore {
+  font-family: var(--f-mono); font-size: .77rem; line-height: 1.75;
+  color: var(--ink-soft);
+  background: var(--surface-2);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  margin: 0;
+}
+.arvore i { color: var(--muted); font-style: normal; }
+
+@media (prefers-reduced-motion: no-preference) {
+  a { transition: color .15s ease; }
+}
+</style>
+
+<div class="folha">
+
+<header class="capa">
+  <div class="capa-interna">
+    <div class="trilha">Computação Gráfica I · Prof. Jonh Edson · Atividade AC1</div>
+    <h1>Quatro Áreas da Computação Visual
+      <span class="quatro">
+        <b class="s1">síntese</b> · <b class="s2">processamento</b> ·
+        <b class="s3">visão</b> · <b class="s4">visualização</b>
+      </span>
+    </h1>
+    <p class="resumo">Para cada área, uma aplicação de repositório público foi
+      executada e medida. Todos os números e figuras deste relatório vêm dessa
+      execução — nada foi copiado de documentação.</p>
+    <div class="ficha">
+      <span><b>Ambiente</b> Python 3.12 · Windows 11 · Intel Iris Xe</span>
+      <span><b>Contexto gráfico</b> OpenGL 3.3 Core, offscreen</span>
+      <span><b>Execução completa</b> 22 s</span>
+    </div>
+  </div>
+</header>
+
+<h2>A tese: cada área se define pelo par (o que entra, o que sai)</h2>
+
+<p>O material da disciplina descreve as quatro áreas como <em>“áreas de pesquisa
+com identidade própria e focos distintos, mas que interagem entre si e
+compartilham técnicas e algoritmos”</em>. O que dá identidade a cada uma não é a
+técnica — várias são compartilhadas — e sim <strong>o tipo de dado que entra e o
+tipo de dado que sai</strong>.</p>
+
+<figure>
+  <img src="{{IMG:00_comparativo/saida/diagrama_areas.png}}"
+       alt="Diagrama com três caixas de tipo de dado — modelos e dados, imagem digital, descrição simbólica — ligadas por quatro setas coloridas, cada uma nomeando uma das áreas.">
+  <figcaption>As <b>caixas são tipos de dado</b>; as <b>setas são as áreas</b>.
+    Essa leitura separa as quatro sem ambiguidade. Figura gerada por
+    <code>00_comparativo/gerar_comparativo.py</code>.</figcaption>
+</figure>
+
+<div class="tabela larga">
+<table>
+  <caption>As quatro áreas em uma linha cada</caption>
+  <thead>
+    <tr><th>#</th><th>Área</th><th>Entra</th><th>Sai</th><th>Pergunta que responde</th></tr>
+  </thead>
+  <tbody>
+    <tr class="a1"><td><span class="pastilha">1</span></td>
+      <td><strong>Síntese de Imagens</strong><br>(Computação Gráfica)</td>
+      <td>modelo geométrico, material, luz, câmera</td>
+      <td>imagem matricial</td>
+      <td><em>Como este objeto se pareceria?</em></td></tr>
+    <tr class="a2"><td><span class="pastilha">2</span></td>
+      <td><strong>Processamento de Imagens</strong></td>
+      <td>imagem</td><td>imagem</td>
+      <td><em>Como deixar esta imagem melhor ou mais útil?</em></td></tr>
+    <tr class="a3"><td><span class="pastilha">3</span></td>
+      <td><strong>Visão Computacional</strong><br>(Visão Artificial)</td>
+      <td>imagem</td><td>descrição simbólica</td>
+      <td><em>O que há nesta imagem?</em></td></tr>
+    <tr class="a4"><td><span class="pastilha">4</span></td>
+      <td><strong>Visualização Computacional</strong></td>
+      <td>dados medidos ou abstratos</td>
+      <td>imagem para análise</td>
+      <td><em>O que estes dados estão dizendo?</em></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Repare na simetria: <strong>Síntese</strong> e <strong>Visão</strong> são
+operações inversas — <code>dados → imagem</code> contra
+<code>imagem → dados</code>. O <strong>Processamento</strong> é a única que
+permanece no mesmo domínio. E a <strong>Visualização</strong> compartilha o motor
+de renderização da Síntese, mas troca o objetivo de <em>realismo</em> por
+<em>legibilidade</em>.</p>
+
+<figure class="larga">
+  <img src="{{IMG:00_comparativo/saida/painel_areas.png}}"
+       alt="Quatro painéis lado a lado: dragão 3D sombreado, mapa de bordas de Canny, foto de ônibus com caixas de detecção, e joelho renderizado por volume.">
+  <figcaption>Um resultado executado de cada área, com a entrada e a saída
+    anotadas sob cada painel.</figcaption>
+</figure>
+
+<h3>Como executar</h3>
+<div class="terminal">
+  <div class="barra">terminal</div>
+<pre><i># ambiente</i>
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+<i># roda as quatro áreas em sequência e grava relatorio/log_execucao.txt</i>
+python <b>executar_tudo.py</b></pre>
+</div>
+
+<div class="nota"><b>Sobre a versão do OpenCV.</b> É obrigatório usar a série
+<b>4.x</b>: o OpenCV 5.0 removeu <code>cv2.HOGDescriptor</code>, usado na
+comparação entre abordagem clássica e aprendizado profundo da Área 3. O
+<code>requirements.txt</code> fixa <code>opencv-python==4.14.0.94</code>.</div>
+
+
+<!-- ================= ÁREA 1 ================= -->
+<header class="area a1">
+  <div class="num">1</div>
+  <h2>Síntese de Imagens</h2>
+  <div class="sub">Computação Gráfica · ModernGL sobre OpenGL 3.3 Core</div>
+  <div class="fluxo">
+    <span class="caixa">modelo geométrico</span>
+    <span class="seta">→</span>
+    <span class="caixa">imagem matricial</span>
+  </div>
+</header>
+
+<blockquote>Técnicas para gerar representações visuais a partir de especificações
+geométricas e de atributos visuais dos seus componentes. Modelagem e rendering.
+Objetivo: “mundo” 3D no computador.
+<cite>aula02/intro_computacao_visual.pdf, slide 15</cite></blockquote>
+
+<div class="ficha-app a1">
+  <div><span class="rot">Repositório</span>
+    <span class="val"><a href="https://github.com/moderngl/moderngl">github.com/moderngl/moderngl</a></span></div>
+  <div><span class="rot">Modelo</span>
+    <span class="val"><code>aula08/objetos/dragao.obj</code> — material da própria disciplina</span></div>
+  <div><span class="rot">Programa</span>
+    <span class="val"><code>01_sintese_imagens/sintese_opengl.py</code></span></div>
+</div>
+
+<p>A escolha é deliberada: o material da aula 02 dedica a segunda metade ao
+<strong>OpenGL moderna (3.3+)</strong> e ao pipeline vértices → montagem de
+polígonos → rasterização → <em>fragment shader</em> → <em>frame buffer</em>. O
+programa percorre exatamente esse caminho, com cada etapa isolada.</p>
+
+<h4>Aspectos da área evidenciados</h4>
+<ol>
+  <li><strong>Modelagem</strong> — leitura da malha Wavefront <code>.obj</code>:
+    só vértices e faces, nenhum pixel.</li>
+  <li><strong>Poligonização</strong> — normais por vértice calculadas como média
+    das normais das faces incidentes.</li>
+  <li><strong>Transformações geométricas</strong> — as matrizes
+    <code>Model</code>, <code>View</code> e <code>Projection</code> são
+    construídas à mão em coordenadas homogêneas 4×4, não importadas de
+    biblioteca.</li>
+  <li><strong>Rasterização</strong> — a conversão vetorial → matricial acontece
+    na GPU.</li>
+  <li><strong>Modelo de iluminação</strong> — Phong (ambiente + difusa +
+    especular) escrito em GLSL, com correção gama.</li>
+  <li><strong>Remoção de superfícies ocultas</strong> — <em>z-buffer</em>.</li>
+  <li><strong>Frame buffer</strong> — leitura do buffer de cor com MSAA 4× e
+    gravação em PNG.</li>
+</ol>
+
+<p>Há ainda um <strong>ajuste de enquadramento</strong> implementado à parte: o
+programa projeta todos os vértices, mede a caixa envolvente já em coordenadas
+normalizadas de dispositivo e aplica escala + translação 2D no espaço de
+recorte. Como <code>x_ndc = x_clip / w</code>, multiplicar <code>x_clip</code>
+por <code>k</code> e somar <code>−k·cx·w</code> equivale a
+<code>(x_ndc − cx)·k</code> — sem tocar em <code>z</code>, o <em>z-buffer</em>
+continua válido.</p>
+
+<div class="terminal">
+  <div class="barra">saída da execução — sintese_opengl.py</div>
+<pre>[1] MODELAGEM  - arquivo .......: dragao.obj  (2391 KB)
+    vertices ...................: <b>19,895</b>
+[2] POLIGONIZACAO - triangulos .: <b>37,986</b>
+    GL_VERSION .................: 3.3.0 - Build 32.0.101.7084
+    GL_RENDERER ................: Intel(R) Iris(R) Xe Graphics
+    VBO enviado a GPU ..........: 466 KB
+    ajuste de enquadramento ....: fator 2.05x em coordenadas de recorte
+[4-7] 4. Shading de Phong (amb + dif + esp)    <b>0.9 ms</b>  -> saida/d_phong.png</pre>
+</div>
+
+<figure class="larga">
+  <img src="{{IMG:01_sintese_imagens/saida/montagem_pipeline.png}}"
+       alt="Quatro renderizações do mesmo dragão: nuvem de vértices em azul, malha de triângulos em verde, silhueta cinza sem iluminação e modelo laranja com sombreamento de Phong.">
+  <figcaption>Os quatro quadros são <b>o mesmo modelo, na mesma câmera</b>,
+    variando apenas o estágio do pipeline. A “forma” já existe no quadro 1 — ela
+    é dado de entrada. O que os estágios seguintes acrescentam é
+    <b>aparência</b>.</figcaption>
+</figure>
+
+<div class="balanco a1">
+  <div class="rot">Balanço da área 1</div>
+  <ul>
+    <li><strong>Entrada:</strong> <span class="numero">19.895</span> vértices e
+      <span class="numero">37.986</span> triângulos — 466 KB de números, nenhum pixel.</li>
+    <li><strong>Saída:</strong> imagem 900×900 = <span class="numero">810.000</span>
+      pixels, em <span class="numero">0,9 ms</span>.</li>
+    <li>Nenhuma imagem foi lida como entrada. A imagem foi <strong>sintetizada</strong>.</li>
+    <li>O custo é dominado pela rasterização, e não pela leitura do modelo — daí
+      a área ser inseparável do hardware gráfico.</li>
+  </ul>
+</div>
+
+
+<!-- ================= ÁREA 2 ================= -->
+<header class="area a2">
+  <div class="num">2</div>
+  <h2>Processamento de Imagens</h2>
+  <div class="sub">OpenCV 4.14 · imagens de teste do próprio repositório</div>
+  <div class="fluxo">
+    <span class="caixa">imagem</span>
+    <span class="seta">→</span>
+    <span class="caixa">imagem</span>
+  </div>
+</header>
+
+<blockquote>Técnicas de transformação de imagens descritas como “matrizes” de
+pixels. Objetivo: melhorar características visuais (aumentar contraste, melhorar
+foco, reduzir ruído, eliminar distorções); extrair elementos de interesse; ou
+mesmo “transformar” a imagem, criando efeitos visuais.
+<cite>aula02/intro_computacao_visual.pdf, slide 23</cite></blockquote>
+
+<div class="ficha-app a2">
+  <div><span class="rot">Repositório</span>
+    <span class="val"><a href="https://github.com/opencv/opencv">github.com/opencv/opencv</a></span></div>
+  <div><span class="rot">Imagens</span>
+    <span class="val"><code>samples/data/fruits.jpg</code> e
+      <code>samples/data/smarties.png</code>, do próprio repositório do OpenCV</span></div>
+  <div><span class="rot">Programa</span>
+    <span class="val"><code>02_processamento_imagens/processamento_opencv.py</code></span></div>
+</div>
+
+<p>Os blocos seguem a estrutura do material <code>files/PI.pdf</code>, que
+organiza a área em aquisição → restauração/realce → segmentação → extração de
+atributos → classificação.</p>
+
+<h3>A · Aquisição: resolução espacial e gradação tonal</h3>
+<p>Reprodução das figuras 3.3 e 3.4 do <code>PI.pdf</code>: o efeito da
+<strong>amostragem</strong> (reduzir a grade de 512×480 para 64×60 e 16×15) e da
+<strong>quantização</strong> (de 256 para 16, 4 e 2 níveis por canal). São os dois
+eixos independentes que definem quanta informação uma imagem digital carrega.</p>
+
+<figure class="larga">
+  <img src="{{IMG:02_processamento_imagens/saida/A_aquisicao.png}}"
+       alt="Seis painéis com a mesma foto de frutas: original, duas reduções de resolução e três reduções de níveis de cor.">
+  <figcaption>Amostragem e quantização degradam a imagem por mecanismos
+    diferentes: uma perde <b>detalhe espacial</b>, a outra perde
+    <b>gradação tonal</b>.</figcaption>
+</figure>
+
+<h3>B · Realce: o histograma como descritor global</h3>
+
+<div class="tabela">
+<table>
+  <caption>Efeito da equalização sobre a distribuição de intensidades</caption>
+  <thead><tr><th>Imagem</th><th class="num">Média</th><th class="num">Desvio padrão</th><th>Faixa</th></tr></thead>
+  <tbody>
+    <tr><td>Tons de cinza (original)</td><td class="num">88,7</td><td class="num">45,8</td><td>[0, 238]</td></tr>
+    <tr><td>Baixo contraste (simulado)</td><td class="num">59,4</td><td class="num">20,6</td><td>[20, 127]</td></tr>
+    <tr><td>Equalização de histograma</td><td class="num">129,0</td><td class="num destaque">74,1</td><td>[0, 255]</td></tr>
+    <tr><td>CLAHE (equalização local)</td><td class="num">81,1</td><td class="num">33,4</td><td>[10, 188]</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>A equalização <strong>triplicou o desvio padrão</strong> (20,6 → 74,1) e
+espalhou os valores por toda a faixa. O ponto conceitual: a operação não sabe
+nada sobre o conteúdo — ela apenas redistribui a função de distribuição
+acumulada dos níveis de cinza.</p>
+
+<figure class="larga">
+  <img src="{{IMG:02_processamento_imagens/saida/B_realce_histograma.png}}"
+       alt="Três imagens em tons de cinza com os respectivos histogramas abaixo: baixo contraste, equalizada e CLAHE.">
+  <figcaption>O histograma é o descritor que orienta a decisão — e é também o que
+    revela por que a equalização global amplia ruído onde o CLAHE não amplia.</figcaption>
+</figure>
+
+<h3>C · Restauração: ruído e filtragem</h3>
+
+<div class="tabela">
+<table>
+  <caption>PSNR contra a original, com 8 % dos pixels corrompidos por sal-e-pimenta</caption>
+  <thead><tr><th>Filtro</th><th class="num">PSNR</th><th>Natureza</th></tr></thead>
+  <tbody>
+    <tr><td>imagem ruidosa (sem filtro)</td><td class="num">16,11 dB</td><td>—</td></tr>
+    <tr><td>média 5×5</td><td class="num">26,49 dB</td><td>linear</td></tr>
+    <tr><td>gaussiano 5×5</td><td class="num">26,26 dB</td><td>linear</td></tr>
+    <tr><td><strong>mediana 3×3</strong></td><td class="num destaque">35,51 dB</td><td><strong>não-linear</strong></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>A mediana ganha por quase <strong>9 dB</strong> usando uma janela
+<em>menor</em> que a dos concorrentes. O motivo é estrutural: a mediana de um
+conjunto é imune a valores extremos, enquanto qualquer média ponderada espalha o
+pixel corrompido pela vizinhança.</p>
+
+<figure class="larga">
+  <img src="{{IMG:02_processamento_imagens/saida/C_restauracao.png}}"
+       alt="Seis painéis: original, imagem com ruído sal-e-pimenta, filtro da média, gaussiano, mediana e o resíduo da mediana.">
+  <figcaption>O último painel mostra o <b>resíduo</b> |original − mediana|: onde
+    a filtragem agiu. Ele é quase todo pontos isolados — o filtro removeu o ruído
+    sem destruir as bordas.</figcaption>
+</figure>
+
+<h3>D · Realce de bordas: convolução</h3>
+
+<div class="terminal">
+  <div class="barra">máscaras aplicadas na vizinhança 3×3</div>
+<pre>Sobel_x = [[-1 0 1]      Sobel_y = [[-1 -2 -1]
+           [-2 0 2]                 [ 0  0  0]
+           [-1 0 1]]                [ 1  2  1]]
+
+pixels de borda detectados pelo Canny: <b>6,057</b>  (2.46% da imagem)</pre>
+</div>
+
+<p>É a operação que mais aproxima esta área da seguinte: reduzir a imagem a suas
+descontinuidades é o primeiro passo de quase todo sistema de visão.</p>
+
+<figure class="larga">
+  <img src="{{IMG:02_processamento_imagens/saida/D_convolucao_bordas.png}}"
+       alt="Seis painéis: original em cinza, Sobel X, Sobel Y, magnitude do gradiente, Laplaciano e bordas de Canny.">
+  <figcaption>Da primeira derivada direcional (Sobel X e Y) à magnitude do
+    gradiente, à segunda derivada (Laplaciano) e às arestas finas do Canny.</figcaption>
+</figure>
+
+<h3>E · Segmentação e extração de atributos</h3>
+
+<p>A limiarização só faz sentido quando o histograma é <strong>bimodal</strong>,
+como ensina o <code>PI.pdf</code>. Por isso esta etapa troca de imagem, passando
+para <code>smarties.png</code>.</p>
+
+<ul>
+  <li>Limiar escolhido <strong>automaticamente pelo método de Otsu</strong>: T = 177</li>
+  <li>Após a morfologia (abertura + fechamento): <strong>11 contornos</strong> —
+    objetos encostados saem grudados</li>
+  <li>Após transformada de distância + <strong>watershed</strong>:
+    <strong>15 marcadores</strong>, <strong>14 regiões</strong> acima de 300 px</li>
+</ul>
+
+<p>Atributos extraídos de cada região: área, perímetro e circularidade
+<code>4πA/P²</code>. As regiões inteiras convergem para circularidade ≈
+<strong>0,89</strong> (o valor teórico de um círculo é 1,0; a discretização em
+pixels custa o resto). As duas regiões cortadas pela borda da imagem caem para
+<strong>0,73</strong> e <strong>0,59</strong> — o próprio atributo denuncia que o
+objeto está incompleto.</p>
+
+<figure class="larga">
+  <img src="{{IMG:02_processamento_imagens/saida/E_segmentacao.png}}"
+       alt="Seis painéis mostrando confeitos coloridos: original, limiar de Otsu, morfologia, transformada de distância, rótulos do watershed e contornos numerados.">
+  <figcaption>A transformada de distância transforma “onde há objeto” em “quão
+    fundo dentro do objeto” — e é esse máximo local que dá ao watershed um
+    marcador por confeito, separando os que a limiarização havia fundido.</figcaption>
+</figure>
+
+<div class="balanco a2">
+  <div class="rot">Balanço da área 2</div>
+  <ul>
+    <li><strong>Entrada:</strong> imagem matricial 512×480×3.
+      <strong>Saída:</strong> imagem matricial 512×480 — a mesma natureza de dado.</li>
+    <li>A informação é sempre reorganizada <strong>dentro da própria grade de pixels</strong>.</li>
+    <li>O sistema não sabe que são frutas ou confeitos: conhece intensidades e
+      vizinhanças. Área, perímetro e circularidade são <strong>atributos
+      geométricos</strong>, não semânticos.</li>
+    <li>Dar nome ao objeto é o trabalho da área seguinte.</li>
+  </ul>
+</div>
+
+
+<!-- ================= ÁREA 3 ================= -->
+<header class="area a3">
+  <div class="num">3</div>
+  <h2>Visão Computacional</h2>
+  <div class="sub">Visão Artificial · Ultralytics YOLOv8n, pesos COCO</div>
+  <div class="fluxo">
+    <span class="caixa">imagem</span>
+    <span class="seta">→</span>
+    <span class="caixa">descrição simbólica</span>
+  </div>
+</header>
+
+<blockquote>Colocar “o sentido” da visão na máquina. Problema extremamente
+complexo — visão requer inteligência! Problema mais delimitado: reconhecimento
+de padrões em imagens. p.ex. https://pjreddie.com/darknet/yolo/
+<cite>aula02/intro_computacao_visual.pdf, slide 28</cite></blockquote>
+
+<p>A aplicação escolhida é o <strong>próprio exemplo citado pelo slide</strong>.</p>
+
+<div class="ficha-app a3">
+  <div><span class="rot">Repositório</span>
+    <span class="val"><a href="https://github.com/ultralytics/ultralytics">github.com/ultralytics/ultralytics</a></span></div>
+  <div><span class="rot">Pesos</span>
+    <span class="val"><code>yolov8n.pt</code> — 3.157.200 parâmetros, 80 classes do conjunto COCO</span></div>
+  <div><span class="rot">Imagem</span>
+    <span class="val"><code>bus.jpg</code>, de
+      <a href="https://github.com/ultralytics/assets">github.com/ultralytics/assets</a></span></div>
+  <div><span class="rot">Programa</span>
+    <span class="val"><code>03_visao_computacional/visao_yolo.py</code></span></div>
+</div>
+
+<p>O programa é organizado segundo os <strong>seis passos do “típico sistema de
+visão”</strong> apresentados nos slides 31 a 45.</p>
+
+<h3>Passos 1 e 2 · Aquisição e pré-processamento</h3>
+
+<div class="terminal">
+  <div class="barra">saída da execução — visao_yolo.py</div>
+<pre>PASSO 1 — AQUISIÇÃO
+    dimensões ..................: 810x1080x3 = <b>2,624,400</b> bytes brutos
+
+PASSO 2 — PRÉ-PROCESSAMENTO
+    letterbox ..................: 810x1080 -> 640x640 (escala 0.593, borda dx=80 dy=0)
+    BGR -> RGB, HWC -> NCHW ....: tensor <b>(1, 3, 640, 640)</b>
+    normalização ...............: uint8 [0,255] -> float32 [0,1]</pre>
+</div>
+
+<div class="nota">Todas as operações do Passo 2 — redimensionamento com
+preservação de proporção, preenchimento de borda, conversão de espaço de cor,
+normalização — <b>são Processamento de Imagens</b>. É aqui que a Área 2 entra
+como serviço da Área 3.</div>
+
+<h3>Passos 3 e 5 · Processamento e extração de características</h3>
+
+<div class="tabela">
+<table>
+  <caption>Mapas capturados por ganchos nos blocos iniciais da rede</caption>
+  <thead><tr><th>Bloco</th><th>Formato do mapa</th><th>Interpretação</th></tr></thead>
+  <tbody>
+    <tr><td class="num">0</td><td><code>(1, 16, 320, 320)</code></td><td>16 filtros de 320×320 — bordas e gradientes</td></tr>
+    <tr><td class="num">2</td><td><code>(1, 32, 160, 160)</code></td><td>32 filtros de 160×160 — texturas e contornos</td></tr>
+    <tr><td class="num">4</td><td><code>(1, 64, 80, 80)</code></td><td>64 filtros de 80×80 — partes de objeto</td></tr>
+    <tr><td class="num">6</td><td><code>(1, 128, 40, 40)</code></td><td>128 filtros de 40×40 — padrões semânticos</td></tr>
+  </tbody>
+</table>
+</div>
+
+<figure class="larga">
+  <img src="{{IMG:03_visao_computacional/saida/passo5_mapas_caracteristicas.png}}"
+       alt="Grade de vinte e quatro mapas de ativação em falsa cor, quatro linhas correspondendo a blocos cada vez mais profundos da rede; os primeiros mostram contornos nítidos, os últimos, manchas grosseiras.">
+  <figcaption>Esta figura é o coração da diferença entre as áreas 2 e 3. Os mapas
+    do bloco 0 são <b>visualmente indistinguíveis de uma saída de Sobel</b> — a
+    rede redescobriu, sozinha, detectores de borda. Conforme se desce, a
+    resolução espacial cai e o número de canais sobe: a representação deixa de
+    ser “uma imagem” e passa a ser “um vetor de evidências”.</figcaption>
+</figure>
+
+<h3>Passos 4 e 6 · Análise e reconhecimento</h3>
+
+<div class="tabela larga">
+<table>
+  <caption>Saída da área — descrição simbólica da cena (NMS com IoU 0,45; confiança mínima 0,25)</caption>
+  <thead><tr><th class="num">#</th><th>Classe</th><th class="num">Confiança</th><th>Caixa (x1, y1, x2, y2)</th><th class="num">Área (px)</th></tr></thead>
+  <tbody>
+    <tr><td class="num">1</td><td>bus</td><td class="num">0,873</td><td>23, 231, 805, 757</td><td class="num">411.059</td></tr>
+    <tr><td class="num">2</td><td>person</td><td class="num">0,866</td><td>49, 399, 245, 903</td><td class="num">99.214</td></tr>
+    <tr><td class="num">3</td><td>person</td><td class="num">0,853</td><td>670, 392, 810, 877</td><td class="num">67.999</td></tr>
+    <tr><td class="num">4</td><td>person</td><td class="num">0,825</td><td>222, 406, 345, 858</td><td class="num">55.769</td></tr>
+    <tr><td class="num">5</td><td>person</td><td class="num">0,261</td><td>0, 550, 63, 873</td><td class="num">20.346</td></tr>
+    <tr><td class="num">6</td><td>stop sign</td><td class="num">0,255</td><td>0, 254, 33, 325</td><td class="num">2.288</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Interpretação da cena: <strong>1× bus, 4× person, 1× stop sign</strong>, em
+1.465 ms de inferência completa.</p>
+
+<h3>Contraste: características projetadas à mão × aprendidas</h3>
+
+<p>Para mostrar o que a área ganhou nos últimos vinte anos, o mesmo problema foi
+resolvido com <strong>HOG + SVM</strong> (Dalal &amp; Triggs, 2005), o detector
+clássico que ainda acompanha o OpenCV.</p>
+
+<div class="tabela">
+<table>
+  <thead><tr><th></th><th>HOG + SVM (2005)</th><th>YOLOv8n (2023)</th></tr></thead>
+  <tbody>
+    <tr><td>Descritor</td><td>escrito à mão</td><td>aprendido dos dados</td></tr>
+    <tr><td>Classes que sabe procurar</td><td class="num">1 (pedestres)</td><td class="num">80</td></tr>
+    <tr><td>Detecções nesta imagem</td><td>3 pessoas</td><td>4 pessoas + ônibus + placa</td></tr>
+    <tr><td>Tempo</td><td class="num">739 ms</td><td class="num">1.465 ms</td></tr>
+  </tbody>
+</table>
+</div>
+
+<figure class="larga">
+  <img src="{{IMG:03_visao_computacional/saida/comparativo_visao.png}}"
+       alt="Três versões da mesma foto de rua: original; com três caixas azuis frouxas do HOG; e com seis caixas justas e rotuladas do YOLO.">
+  <figcaption>A imagem deixa claro o que os números escondem: as caixas do HOG
+    são frouxas e mal posicionadas, e o detector <b>não tem sequer vocabulário</b>
+    para dizer “ônibus”.</figcaption>
+</figure>
+
+<div class="balanco a3">
+  <div class="rot">Balanço da área 3</div>
+  <ul>
+    <li><strong>Entrada:</strong> imagem matricial 810×1080×3 =
+      <span class="numero">2.624.400</span> bytes.</li>
+    <li><strong>Saída:</strong> descrição simbólica — 6 registros,
+      <span class="numero">974 bytes</span> de JSON.</li>
+    <li>Uma redução de <span class="numero">2.694×</span> no volume de dados: a
+      área troca pixels por <strong>significado</strong>.</li>
+    <li>A imagem anotada é apenas para o humano ver. O produto real é a
+      <strong>lista de objetos</strong> — é ela que alimenta o freio automático,
+      o catálogo, o alarme.</li>
+  </ul>
+</div>
+
+
+<!-- ================= ÁREA 4 ================= -->
+<header class="area a4">
+  <div class="num">4</div>
+  <h2>Visualização Computacional</h2>
+  <div class="sub">VTK / PyVista · Matplotlib · duas frentes: SciVis e InfoVis</div>
+  <div class="fluxo">
+    <span class="caixa">dados medidos ou abstratos</span>
+    <span class="seta">→</span>
+    <span class="caixa">imagem para análise</span>
+  </div>
+</header>
+
+<blockquote>Técnicas da CG para representar dado/informação: representações
+gráficas de dados, numéricos ou não. Objetivos: facilitar o entendimento de
+fenômenos complexos e a exploração de diferentes cenários. Síntese para gerar as
+representações visuais, análise (pelo usuário) para extrair informações.
+<cite>aula02/intro_computacao_visual.pdf, slide 47</cite></blockquote>
+
+<p>O mesmo material (slide 50) separa a área em duas frentes, e ambas foram
+executadas: em <strong>SciVis</strong> a geometria do modelo é
+<em>determinada pelo domínio</em>; em <strong>InfoVis</strong> ela é
+<em>atribuída pelo projetista</em>.</p>
+
+<h3>Parte A · Visualização Científica</h3>
+
+<div class="ficha-app a4">
+  <div><span class="rot">Repositórios</span>
+    <span class="val"><a href="https://github.com/Kitware/VTK">github.com/Kitware/VTK</a> ·
+      <a href="https://github.com/pyvista/pyvista">github.com/pyvista/pyvista</a></span></div>
+  <div><span class="rot">Dado</span>
+    <span class="val">tomografia computadorizada de joelho, de
+      <a href="https://github.com/pyvista/vtk-data">github.com/pyvista/vtk-data</a></span></div>
+  <div><span class="rot">Programa</span>
+    <span class="val"><code>04_visualizacao_computacional/visualizacao_vtk.py</code></span></div>
+</div>
+
+<p>A escolha vem direto do slide 54, que exibe um <em>“Rendering Volumétrico
+Direto: ray casting no Visualization Toolkit”</em>.</p>
+
+<div class="terminal">
+  <div class="barra">o dado de entrada</div>
+<pre>dimensões da grade .........: <b>208 x 248 x 201</b>
+total de voxels ............: <b>10.368.384</b>
+espaçamento (mm) ...........: (0.723, 0.723, 1.0)
+faixa de intensidade .......: 0 a 174
+memória do campo ...........: 9,9 MB
+
+<i>Não é uma imagem e não é uma malha: é uma função f(x,y,z) MEDIDA.
+Não existe superfície nenhuma no arquivo — só valores.</i></pre>
+</div>
+
+<figure>
+  <img src="{{IMG:04_visualizacao_computacional/saida/A_histograma_campo.png}}"
+       alt="Histograma em escala logarítmica das intensidades dos voxels, com linhas verticais tracejadas marcando as faixas de ar, tecido mole e osso.">
+  <figcaption>O histograma do campo é o que orienta todas as decisões seguintes:
+    é ele que diz onde termina o ar, onde está o tecido mole e a partir de qual
+    valor começa o osso.</figcaption>
+</figure>
+
+<figure class="larga">
+  <img src="{{IMG:04_visualizacao_computacional/saida/A_scivis_montagem.png}}"
+       alt="Quatro visualizações da mesma tomografia de joelho: cortes ortogonais, isosuperfícies de pele e osso, rendering volumétrico realçando o osso e rendering volumétrico com pele translúcida.">
+  <figcaption>Três técnicas sobre o <b>mesmo</b> dado. Note o custo da
+    isosuperfície: <b>1,4 milhão de triângulos</b> para representar aquilo que o
+    DVR mostra sem gerar um único polígono.</figcaption>
+</figure>
+
+<ol>
+  <li><strong>Cortes ortogonais</strong> — o mapeamento mais direto possível:
+    intensidade → cor, sem construir geometria alguma.</li>
+  <li><strong>Isosuperfície</strong> (<em>marching cubes</em>) — extrai geometria
+    do campo e devolve o problema ao pipeline da Área 1: isovalor 62 (tecido
+    mole) → 1.226.157 triângulos; isovalor 108 (osso) → 176.354 triângulos.</li>
+  <li><strong>Rendering Volumétrico Direto</strong> (<em>ray casting</em>) — o
+    raio de cada pixel atravessa o volume acumulando cor e opacidade. Nenhuma
+    superfície é construída.</li>
+</ol>
+
+<div class="tabela">
+<table>
+  <caption>O que decide o que aparece no DVR: pontos de controle em [0, 34, 69, 104, 139, 174]</caption>
+  <thead><tr><th>Função de transferência</th><th>Opacidades</th><th>Resultado</th></tr></thead>
+  <tbody>
+    <tr><td>realce do osso</td><td><code>[0, 0, 0, 0.05, 0.60, 0.95]</code></td><td>tecido mole invisível, osso sólido</td></tr>
+    <tr><td>osso + tecido</td><td><code>[0, 0, 0.01, 0.06, 0.70, 0.98]</code></td><td>pele translúcida, osso visível por dentro</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Os dois últimos quadros da montagem são <strong>exatamente a mesma
+tomografia, a mesma câmera e o mesmo algoritmo</strong> — muda só a função de
+transferência. É a demonstração mais limpa de que, em Visualização,
+<strong>a decisão de projeto é o mapeamento, não a forma</strong>.</p>
+
+<h3>Parte B · Visualização de Informação</h3>
+
+<div class="ficha-app a4">
+  <div><span class="rot">Repositórios</span>
+    <span class="val"><a href="https://github.com/matplotlib/matplotlib">github.com/matplotlib/matplotlib</a> ·
+      dados de <a href="https://github.com/plotly/datasets">github.com/plotly/datasets</a></span></div>
+  <div><span class="rot">Dado</span>
+    <span class="val"><code>gapminder2007.csv</code> — 142 países × 5 variáveis, 19 KB</span></div>
+</div>
+
+<p>Reprodução do gráfico do <strong>Gapminder</strong>, citado no slide 62. A
+tabela de entrada não tem geometria nenhuma associada: <strong>um país não tem
+posição (x, y) natural — ela precisa ser inventada</strong>.</p>
+
+<div class="tabela">
+<table>
+  <caption>Mapeamento visual escolhido pelo projetista</caption>
+  <thead><tr><th>Canal visual</th><th>Variável</th></tr></thead>
+  <tbody>
+    <tr><td>posição X</td><td>PIB per capita (US$, escala logarítmica)</td></tr>
+    <tr><td>posição Y</td><td>expectativa de vida (anos)</td></tr>
+    <tr><td>área do círculo</td><td>população</td></tr>
+    <tr><td>cor</td><td>continente (categórica)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<figure class="larga">
+  <img src="{{IMG:04_visualizacao_computacional/saida/B_infovis_gapminder.png}}"
+       alt="Gráfico de bolhas do Gapminder 2007: PIB per capita em escala logarítmica no eixo horizontal, expectativa de vida no vertical, tamanho por população e cor por continente.">
+  <figcaption>Correlação entre log(PIB) e expectativa de vida:
+    <b>0,809</b>. A expectativa de vida varia de 39,6 a 82,6 anos —
+    <b>43 anos</b> entre o pior e o melhor caso.</figcaption>
+</figure>
+
+<div class="tabela">
+<table>
+  <caption>Leitura possibilitada pelo gráfico</caption>
+  <thead><tr><th>Continente</th><th class="num">n</th><th class="num">Vida média</th><th class="num">PIB mediano</th></tr></thead>
+  <tbody>
+    <tr><td>Africa</td><td class="num">52</td><td class="num">54,8 anos</td><td class="num">US$ 1.452</td></tr>
+    <tr><td>Americas</td><td class="num">25</td><td class="num">73,6 anos</td><td class="num">US$ 8.948</td></tr>
+    <tr><td>Asia</td><td class="num">33</td><td class="num">70,7 anos</td><td class="num">US$ 4.471</td></tr>
+    <tr><td>Europe</td><td class="num">30</td><td class="num">77,6 anos</td><td class="num">US$ 28.054</td></tr>
+    <tr><td>Oceania</td><td class="num">2</td><td class="num">80,7 anos</td><td class="num">US$ 29.810</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="balanco a4">
+  <div class="rot">Balanço da área 4</div>
+  <ul>
+    <li><strong>Entrada:</strong> dados que não são imagem nem modelo geométrico
+      de um objeto — um campo escalar medido
+      (<span class="numero">10.368.384</span> voxels) e uma tabela de indicadores
+      (<span class="numero">142</span> linhas).</li>
+    <li><strong>Saída:</strong> imagem cujo propósito é <strong>análise</strong>,
+      não realismo. A pergunta não é “ficou bonito?”, e sim “ficou legível?”.</li>
+    <li>SciVis × InfoVis: a forma do joelho <strong>veio do tomógrafo</strong>; a
+      posição do Brasil no gráfico <strong>foi escolhida por quem desenhou o
+      gráfico</strong>.</li>
+    <li>Ler o joelho é intuitivo; ler o Gapminder exige saber que o eixo X é
+      logarítmico e que é a <em>área</em> — não o raio — que codifica a população.</li>
+  </ul>
+</div>
+
+
+<!-- ================= CONCLUSÃO ================= -->
+<h2>Conclusão: o que separa e o que une</h2>
+
+<p><strong>O que separa</strong> é o par (entrada, saída), demonstrado
+numericamente pelas execuções.</p>
+
+<div class="tabela larga">
+<table>
+  <caption>Todas as medidas vêm de relatorio/log_execucao.txt</caption>
+  <thead><tr><th>Área</th><th>Entrada medida</th><th>Saída medida</th><th>Transformação</th></tr></thead>
+  <tbody>
+    <tr class="a1"><td><span class="pastilha">1</span> Síntese</td>
+      <td>19.895 vértices / 37.986 triângulos (466 KB)</td>
+      <td>imagem 900×900 (810.000 px)</td>
+      <td><strong>expande</strong> geometria em pixels</td></tr>
+    <tr class="a2"><td><span class="pastilha">2</span> Processamento</td>
+      <td>imagem 512×480×3</td><td>imagem 512×480</td>
+      <td><strong>preserva</strong> o domínio</td></tr>
+    <tr class="a3"><td><span class="pastilha">3</span> Visão</td>
+      <td>imagem 810×1080×3 (2,6 MB)</td><td>6 objetos (974 bytes)</td>
+      <td><strong>comprime</strong> 2.694× em significado</td></tr>
+    <tr class="a4"><td><span class="pastilha">4</span> Visualização</td>
+      <td>10.368.384 voxels (9,9 MB) / 142 linhas (19 KB)</td>
+      <td>imagem 900×900 para análise</td>
+      <td><strong>traduz</strong> dado em forma visível</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>O que une</strong> apareceu sozinho durante a execução, sem ter sido
+forçado:</p>
+
+<ul>
+  <li>A <strong>Área 3 usa a Área 2</strong>: todo o Passo 2 do YOLO —
+    <em>letterbox</em>, conversão de espaço de cor, normalização — é
+    Processamento de Imagens puro.</li>
+  <li>A <strong>Área 3 redescobriu a Área 2</strong>: os mapas de características
+    do bloco 0 do YOLO são detectores de borda, visualmente equivalentes ao Sobel
+    da Área 2. A diferença é que um foi escrito por uma pessoa e o outro foi
+    aprendido de dados.</li>
+  <li>A <strong>Área 4 usa a Área 1</strong>: a isosuperfície por
+    <em>marching cubes</em> produz 1,4 milhão de triângulos que são rasterizados
+    exatamente pelo pipeline da Área 1. O DVR é a alternativa que dispensa esse
+    passo.</li>
+  <li>As <strong>Áreas 1 e 4 compartilham o motor e divergem no objetivo</strong>:
+    as duas fazem <code>dados → imagem</code>, mas uma persegue realismo e a
+    outra, legibilidade.</li>
+</ul>
+
+<p>O ponto do slide 66 — <em>identidade própria, focos distintos, técnicas
+compartilhadas</em> — não é uma ressalva acadêmica. É o que se observa assim que
+os quatro programas são executados lado a lado.</p>
+
+
+<footer class="rodape">
+  <div class="rodape-interna">
+    <h3 style="margin-top:0">Estrutura da entrega</h3>
+<pre class="arvore">AC1-Entrega/
+├── README.md                       <i>relatório em Markdown</i>
+├── requirements.txt                <i>versões exatas usadas na execução</i>
+├── executar_tudo.py                <i>roda as quatro áreas em sequência</i>
+├── assets/                         <i>dados de entrada (repositórios públicos)</i>
+├── 00_comparativo/                 <i>diagrama e painel das quatro áreas</i>
+├── 01_sintese_imagens/             <i>ModernGL / OpenGL 3.3 Core</i>
+├── 02_processamento_imagens/       <i>OpenCV</i>
+├── 03_visao_computacional/         <i>Ultralytics YOLOv8n + HOG/SVM</i>
+├── 04_visualizacao_computacional/  <i>VTK/PyVista + Matplotlib</i>
+└── relatorio/
+    ├── log_execucao.txt            <i>saída de console das cinco execuções</i>
+    └── relatorio.html              <i>este documento</i></pre>
+
+    <h3>Repositórios públicos executados</h3>
+    <div class="tabela">
+    <table>
+      <thead><tr><th>Área</th><th>Projeto</th><th>Endereço</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>ModernGL</td><td><a href="https://github.com/moderngl/moderngl">github.com/moderngl/moderngl</a></td></tr>
+        <tr><td class="num">2</td><td>OpenCV</td><td><a href="https://github.com/opencv/opencv">github.com/opencv/opencv</a></td></tr>
+        <tr><td class="num">3</td><td>Ultralytics YOLO</td><td><a href="https://github.com/ultralytics/ultralytics">github.com/ultralytics/ultralytics</a></td></tr>
+        <tr><td class="num">3</td><td>Ultralytics assets</td><td><a href="https://github.com/ultralytics/assets">github.com/ultralytics/assets</a></td></tr>
+        <tr><td class="num">4</td><td>VTK — Visualization Toolkit</td><td><a href="https://github.com/Kitware/VTK">github.com/Kitware/VTK</a></td></tr>
+        <tr><td class="num">4</td><td>PyVista</td><td><a href="https://github.com/pyvista/pyvista">github.com/pyvista/pyvista</a></td></tr>
+        <tr><td class="num">4</td><td>vtk-data (tomografia)</td><td><a href="https://github.com/pyvista/vtk-data">github.com/pyvista/vtk-data</a></td></tr>
+        <tr><td class="num">4</td><td>Matplotlib</td><td><a href="https://github.com/matplotlib/matplotlib">github.com/matplotlib/matplotlib</a></td></tr>
+        <tr><td class="num">4</td><td>plotly/datasets (Gapminder)</td><td><a href="https://github.com/plotly/datasets">github.com/plotly/datasets</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Algoritmos citados</h3>
+    <ul>
+      <li>Phong, B. T. (1975). <em>Illumination for computer generated pictures.</em></li>
+      <li>Otsu, N. (1979). <em>A threshold selection method from gray-level histograms.</em></li>
+      <li>Canny, J. (1986). <em>A computational approach to edge detection.</em></li>
+      <li>Lorensen, W. &amp; Cline, H. (1987). <em>Marching cubes: a high resolution 3D surface construction algorithm.</em></li>
+      <li>Dalal, N. &amp; Triggs, B. (2005). <em>Histograms of oriented gradients for human detection.</em></li>
+      <li>Redmon, J. et al. (2016). <em>You Only Look Once: unified, real-time object detection.</em></li>
+    </ul>
+  </div>
+</footer>
+
+</div>

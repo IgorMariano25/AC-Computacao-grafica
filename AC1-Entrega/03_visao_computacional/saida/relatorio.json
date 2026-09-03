@@ -1,0 +1,147 @@
+{
+  "entrada": {
+    "arquivo": "bus.jpg",
+    "largura": 810,
+    "altura": 1080
+  },
+  "preprocessamento": {
+    "tensor": [
+      1,
+      3,
+      640,
+      640
+    ],
+    "escala": 0.5926,
+    "borda": [
+      80,
+      0
+    ]
+  },
+  "rede": {
+    "parametros": 3157200,
+    "n_classes": 80,
+    "tempo_forward_ms": 116.2,
+    "mapas": {
+      "bloco_0": [
+        1,
+        16,
+        320,
+        320
+      ],
+      "bloco_2": [
+        1,
+        32,
+        160,
+        160
+      ],
+      "bloco_4": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "bloco_6": [
+        1,
+        128,
+        40,
+        40
+      ]
+    }
+  },
+  "deteccoes": [
+    {
+      "classe": "bus",
+      "id_classe": 5,
+      "confianca": 0.8734,
+      "caixa_xyxy": [
+        22.9,
+        231.3,
+        805.0,
+        756.8
+      ],
+      "largura_px": 782.1,
+      "altura_px": 525.6,
+      "area_px": 411059.4
+    },
+    {
+      "classe": "person",
+      "id_classe": 0,
+      "confianca": 0.8657,
+      "caixa_xyxy": [
+        48.6,
+        398.6,
+        245.3,
+        902.7
+      ],
+      "largura_px": 196.8,
+      "altura_px": 504.2,
+      "area_px": 99214.3
+    },
+    {
+      "classe": "person",
+      "id_classe": 0,
+      "confianca": 0.8528,
+      "caixa_xyxy": [
+        669.5,
+        392.2,
+        809.7,
+        877.0
+      ],
+      "largura_px": 140.2,
+      "altura_px": 484.8,
+      "area_px": 67998.8
+    },
+    {
+      "classe": "person",
+      "id_classe": 0,
+      "confianca": 0.8252,
+      "caixa_xyxy": [
+        221.5,
+        405.8,
+        345.0,
+        857.5
+      ],
+      "largura_px": 123.5,
+      "altura_px": 451.7,
+      "area_px": 55768.6
+    },
+    {
+      "classe": "person",
+      "id_classe": 0,
+      "confianca": 0.2611,
+      "caixa_xyxy": [
+        0.0,
+        550.5,
+        63.0,
+        873.4
+      ],
+      "largura_px": 63.0,
+      "altura_px": 322.9,
+      "area_px": 20346.1
+    },
+    {
+      "classe": "stop sign",
+      "id_classe": 11,
+      "confianca": 0.2551,
+      "caixa_xyxy": [
+        0.1,
+        254.5,
+        32.6,
+        324.9
+      ],
+      "largura_px": 32.5,
+      "altura_px": 70.4,
+      "area_px": 2288.4
+    }
+  ],
+  "contagem_por_classe": {
+    "bus": 1,
+    "person": 4,
+    "stop sign": 1
+  },
+  "tempo_inferencia_ms": 1464.6,
+  "hog_classico": {
+    "n_pessoas": 3,
+    "tempo_ms": 739.3
+  }
+}

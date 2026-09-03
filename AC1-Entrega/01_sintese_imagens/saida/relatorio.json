@@ -1,0 +1,26 @@
+{
+  "entrada": {
+    "arquivo": "dragao.obj",
+    "bytes": 2447944,
+    "vertices": 19895,
+    "triangulos": 37986
+  },
+  "gl": {
+    "version": "3.3.0 - Build 32.0.101.7084",
+    "renderer": "Intel(R) Iris(R) Xe Graphics"
+  },
+  "saida": {
+    "resolucao": [
+      900,
+      900
+    ],
+    "pixels": 810000,
+    "bytes_png_phong": 88538,
+    "tempos_ms": {
+      "a_vertices": 1.98,
+      "b_wireframe": 3.63,
+      "c_flat": 0.89,
+      "d_phong": 0.86
+    }
+  }
+}

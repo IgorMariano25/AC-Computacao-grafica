@@ -1,0 +1,35 @@
+# Ambiente usado na execução desta entrega (Python 3.12, Windows 11)
+#
+# Instalação:
+#   python -m venv .venv
+#   .venv\Scripts\activate            (Windows)   |   source .venv/bin/activate  (Linux/macOS)
+#   pip install -r requirements.txt
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+#
+# Observação: o torch é instalado à parte para pegar a variante de CPU
+# (a variante padrão do PyPI traz o CUDA e ocupa vários GB sem necessidade aqui).
+
+# --- comum a todas as áreas ---
+numpy==2.5.2
+matplotlib==3.11.1
+pillow==12.3.0
+
+# --- Área 1: Síntese de Imagens (pipeline OpenGL 3.3 Core) ---
+moderngl==5.12.0
+
+# --- Área 2: Processamento de Imagens ---
+# a série 4.x é obrigatória: o OpenCV 5.0 removeu cv2.HOGDescriptor,
+# usado na comparação da Área 3
+opencv-python==4.14.0.94
+scipy==1.18.1
+
+# --- Área 3: Visão Computacional ---
+ultralytics==8.4.138
+# torch==2.14.0+cpu  -> instalar pelo índice de CPU (ver acima)
+
+# --- Área 4: Visualização Computacional ---
+pyvista==0.48.4
+vtk==9.6.2
+pandas==3.0.5
+imageio==2.37.4
+pooch==1.9.0
