@@ -415,6 +415,84 @@ figcaption b { color: var(--ink-soft); font-weight: 600; }
 @media (prefers-reduced-motion: no-preference) {
   a { transition: color .15s ease; }
 }
+
+/* ---------- versão impressa / PDF ---------- */
+@page {
+  size: A4;
+  margin: 16mm 14mm 18mm;
+}
+
+@media print {
+  /* o PDF é sempre claro, independentemente do tema do sistema */
+  :root {
+    --ground:      #ffffff;
+    --surface:     #ffffff;
+    --surface-2:   #f4f6f9;
+    --ink:         #171b23;
+    --ink-soft:    #3d4553;
+    --muted:       #5d6674;
+    --rule:        #c8cdd7;
+    --rule-soft:   #dfe3ea;
+    --a1: #b25a12;   --a1-tint: #fbf1e7;
+    --a2: #2059aa;   --a2-tint: #e9f0fb;
+    --a3: #12724e;   --a3-tint: #e6f4ee;
+    --a4: #75409b;   --a4-tint: #f3ecf9;
+    --shadow: none;
+  }
+
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body { background: #ffffff; font-size: 10.2pt; line-height: 1.55; }
+
+  .folha {
+    grid-template-columns:
+      [full-start] 0
+      [wide-start] minmax(0, 1fr)
+      [text-start] min(78ch, 100%)
+      [text-end]   minmax(0, 1fr)
+      [wide-end]   0
+      [full-end];
+    row-gap: .85rem;
+    padding-bottom: 0;
+  }
+
+  .capa {
+    padding: 0 0 1.4rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 2px solid var(--rule);
+    break-after: avoid;
+  }
+  .capa-interna { max-width: none; gap: .8rem; }
+  h1 { font-size: 27pt; }
+  h1 .quatro { font-size: .38em; margin-top: .55rem; }
+  .resumo { font-size: 11pt; }
+
+  h2 { font-size: 16pt; margin-top: 1.4rem; break-after: avoid; }
+  h3 { font-size: 11.5pt; break-after: avoid; }
+  h4 { break-after: avoid; }
+  blockquote { font-size: 10.5pt; break-inside: avoid; }
+
+  /* nada de elemento partido ao meio entre páginas */
+  figure, .terminal, .balanco, .ficha-app, .nota, .area, table { break-inside: avoid; }
+  figure img { max-height: 20cm; object-fit: contain; }
+  .tabela { overflow-x: visible; }
+  table { font-size: 8.8pt; }
+  .terminal pre { font-size: 7.4pt; overflow-x: visible; white-space: pre-wrap; }
+  .arvore { font-size: 7.6pt; overflow-x: visible; }
+
+  /* cada área começa em página nova */
+  .area { break-before: page; margin-top: 0; padding-top: 0; }
+
+  .rodape {
+    break-before: page;
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+  }
+  .rodape-interna { max-width: none; }
+
+  a { color: var(--a2); text-decoration: none; }
+}
 </style>
 
 <div class="folha">
@@ -435,6 +513,11 @@ figcaption b { color: var(--ink-soft); font-weight: 600; }
       <span><b>Ambiente</b> Python 3.12 · Windows 11 · Intel Iris Xe</span>
       <span><b>Contexto gráfico</b> OpenGL 3.3 Core, offscreen</span>
       <span><b>Execução completa</b> 22 s</span>
+    </div>
+    <div class="ficha">
+      <span><b>Versão online</b>
+        <a href="https://claude.ai/code/artifact/e7cf0146-2404-43a7-ae04-8ea515ebe750">claude.ai/code/artifact/e7cf0146</a></span>
+      <span><b>Código e figuras</b> <code>AC1-Entrega/</code></span>
     </div>
   </div>
 </header>

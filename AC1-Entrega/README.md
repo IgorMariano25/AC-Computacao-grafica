@@ -5,6 +5,22 @@
 
 Para cada área foi selecionada uma aplicação, apresentados os seus aspectos principais e **executado código de repositório público**, com explicação dos aspectos específicos daquela área. Todos os números e imagens deste documento vêm da execução real registrada em [`relatorio/log_execucao.txt`](relatorio/log_execucao.txt).
 
+### Relatório
+
+| Formato | Onde |
+|---|---|
+| **Versão online** (navegável, com tema claro/escuro) | <https://claude.ai/code/artifact/e7cf0146-2404-43a7-ae04-8ea515ebe750> |
+| **PDF** (26 páginas, A4, pronto para entrega) | [`relatorio/relatorio.pdf`](relatorio/relatorio.pdf) |
+| **HTML autocontido** (figuras embutidas, abre offline) | [`relatorio/relatorio.html`](relatorio/relatorio.html) |
+| **Markdown** | este arquivo |
+
+Os quatro formatos têm o mesmo conteúdo. O HTML e o PDF são gerados a partir das figuras produzidas pelos programas:
+
+```bash
+python relatorio/gerar_relatorio_html.py    # embute as figuras como data URI
+python relatorio/gerar_relatorio_pdf.py     # imprime o HTML via Chrome/Edge headless
+```
+
 ---
 
 ## 1. A tese: cada área se define pelo par (o que entra, o que sai)
@@ -417,8 +433,15 @@ AC1-Entrega/
 ├── 03_visao_computacional/         Ultralytics YOLOv8n + HOG/SVM
 ├── 04_visualizacao_computacional/  VTK/PyVista + Matplotlib
 └── relatorio/
-    └── log_execucao.txt            saída de console das cinco execuções
+    ├── log_execucao.txt            saída de console das cinco execuções
+    ├── relatorio_modelo.html       modelo do relatório (figuras como marcadores)
+    ├── gerar_relatorio_html.py     embute as figuras e gera o HTML autocontido
+    ├── gerar_relatorio_pdf.py      imprime o HTML em PDF (Chrome/Edge headless)
+    ├── relatorio.html              relatório autocontido, 1,8 MB
+    └── relatorio.pdf               relatório em PDF, 26 páginas A4
 ```
+
+O PDF é impresso pelo mesmo motor que renderiza a versão online (Chromium), então sai idêntico ao que se vê no navegador. O modelo tem uma folha de estilo `@media print` própria: força o tema claro, quebra cada área em página nova e impede que figuras, tabelas e blocos de terminal sejam cortados ao meio.
 
 ## 9. Referências
 
