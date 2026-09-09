@@ -32,7 +32,7 @@ BALANCO DA AREA (entrada -> saida)
   A conversao vetorial -> matricial e a RASTERIZACAO, executada na GPU.
   Nenhuma imagem foi lida como entrada: a imagem foi SINTETIZADA.
 
-Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\01_sintese_imagens\saida
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1\01_sintese_imagens\saida
 
 
 ==============================================================================
@@ -106,7 +106,7 @@ BALANÇO DA ÁREA (entrada -> saída)
   A informação é sempre reorganizada dentro da própria grade de pixels.
   O sistema não sabe que são frutas — só conhece intensidades e vizinhanças.
 
-Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\02_processamento_imagens\saida
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1\02_processamento_imagens\saida
 
 
 ==============================================================================
@@ -169,7 +169,7 @@ BALANÇO DA ÁREA (entrada -> saída)
   troca pixels por SIGNIFICADO. A imagem anotada é só para o humano ver;
   o produto real da Visão Computacional é a lista de objetos acima.
 
-Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\03_visao_computacional\saida
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1\03_visao_computacional\saida
 
 
 ==============================================================================
@@ -261,7 +261,7 @@ BALANÇO DA ÁREA (entrada -> saída)
   A área compartilha o motor de renderização com a Área 1, mas o produto
   é entendimento: a pergunta não é 'ficou bonito?' e sim 'ficou legível?'.
 
-Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1-Entrega\04_visualizacao_computacional\saida
+Arquivos gerados em: E:\AC1-Computação-Gráfica\AC1\04_visualizacao_computacional\saida
 
 
 ==============================================================================
@@ -272,5 +272,5 @@ duração: 1.6 s | código de saída: 0
 Gerando quadro comparativo das quatro áreas...
 -> saida/painel_areas.png
 -> saida/diagrama_areas.png
-Arquivos em: E:\AC1-Computação-Gráfica\AC1-Entrega\00_comparativo\saida
+Arquivos em: E:\AC1-Computação-Gráfica\AC1\00_comparativo\saida
 
