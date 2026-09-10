@@ -9,7 +9,7 @@
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Blender](https://img.shields.io/badge/Blender-4.5%20LTS-EA7600?style=flat-square&logo=blender&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-11-0078D4?style=flat-square&logo=windows&logoColor=white)
-![Entregas](https://img.shields.io/badge/entregas-2%20de%203-brightgreen?style=flat-square)
+![Entregas](https://img.shields.io/badge/entregas-2%20de%206-brightgreen?style=flat-square)
 
 </div>
 
