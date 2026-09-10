@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎨 Computação Gráfica I
+# 🎨 Computação Gráfica 
 
 ### 📚 Estudos Dirigidos
 
