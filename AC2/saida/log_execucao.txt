@@ -1,0 +1,313 @@
+ESTUDO DIRIGIDO 02 — TRANSFORMAÇÕES GEOMÉTRICAS 2D
+Transformações em coordenadas homogêneas 3x3, plotagem com Matplotlib.
+numpy 2.5.3 | matplotlib 3.11.1 | python 3.12.0
+
+============================================================================
+EXERCÍCIO 1 — Translação simples do ponto P(2, 3) pelo vetor (4, -2)
+============================================================================
+
+          |  1   0   4 |
+T(4,-2) = |  0   1  -2 |
+          |  0   0   1 |
+
+  P  = (2, 3)   ->   P' = T . P = (6, 1)
+  deslocamento por eixo ..: dx = +4   dy = -2
+  distância percorrida ...: 4.4721
+  det da parte linear ....: 1  (a translação não deforma nada)
+
+  >> RESPOSTA: P' = (6, 1). AS DUAS coordenadas mudaram: x de 2 para 6 (+4) e y de 3 para 1 (-2).
+  A translação é a única das transformações básicas que NÃO é linear:
+  ela não pode ser escrita como matriz 2x2. É por isso que todo o
+  trabalho usa coordenadas homogêneas 3x3, onde (tx, ty) ocupa a 3ª coluna.
+
+  figura -> ex01_translacao.png
+
+============================================================================
+EXERCÍCIO 2 — Escala uniforme de fator 2 no triângulo A(1,1) B(3,1) C(2,4)
+============================================================================
+
+         | 2  0  0 |
+S(2,2) = | 0  2  0 |
+         | 0  0  1 |
+
+    vértice   original               transformado          
+    --------- ---------------------- ----------------------
+    A         (1, 1)                 (2, 2)                
+    B         (3, 1)                 (6, 2)                
+    C         (2, 4)                 (4, 8)                
+
+  área ........: 3.0000  ->  12.0000   (x 4 = fator²)
+  perímetro ...: 8.3246  ->  16.6491   (x 2 = fator)
+  ângulos .....: [71.57 71.57 36.87]  ->  [71.57 71.57 36.87]   (inalterados)
+  det(S) ......: 4  = fator de área
+
+  >> RESPOSTA: A' = (2, 2), B' = (6, 2), C' = (4, 8).
+  O triângulo DOBRA em cada dimensão linear, então a área QUADRUPLICA
+  (3 -> 12). Os ângulos internos não mudam: a escala uniforme é uma
+  semelhança, preserva a forma. E, por ser em relação à origem, ela
+  também AFASTA a figura: o baricentro vai de (2, 2) para (4, 4).
+
+  figura -> ex02_escala_uniforme.png
+
+============================================================================
+EXERCÍCIO 3 — Escala não uniforme (sx = 2, sy = 0,5) no mesmo triângulo
+============================================================================
+
+             | 2.0  0.0  0.0 |
+S(2 , 0.5) = | 0.0  0.5  0.0 |
+             | 0.0  0.0  1.0 |
+
+    vértice   original               transformado          
+    --------- ---------------------- ----------------------
+    A         (1, 1)                 (2, 0.5)              
+    B         (3, 1)                 (6, 0.5)              
+    C         (2, 4)                 (4, 2)                
+
+  área ........: 3.0000  ->  3.0000   (x 1.00)
+  perímetro ...: 8.3246  ->  9.0000   (x 1.0811)
+  ângulos .....: [71.57 71.57 36.87]  ->  [ 36.87  36.87 106.26]   (MUDARAM)
+  det(S) ......: 1.00  = 2 x 0,5
+
+  >> RESPOSTA: A' = (2, 0.5), B' = (6, 0.5), C' = (4, 2).
+  Caso instrutivo: det(S) = 2 x 0,5 = 1, então a ÁREA SE MANTÉM em 3,0
+  — mas o triângulo está claramente deformado. O que se perde aqui não
+  é área: são os ÂNGULOS. A escala não uniforme é afim, não é
+  semelhança; ela achata em y o mesmo tanto que estica em x.
+
+  figura -> ex03_escala_nao_uniforme.png
+
+============================================================================
+EXERCÍCIO 4 — Rotação de P(1, 0) em 90° anti-horário em torno da origem
+============================================================================
+
+  R(θ) = | cos θ   -sen θ   0 |     com θ = 90°:  cos 90° = 0, sen 90° = 1
+         | sen θ    cos θ   0 |
+         |   0        0     1 |
+
+         |  0  -1   0 |
+R(90°) = |  1   0   0 |
+         |  0   0   1 |
+
+  P  = (1, 0)   ->   P' = R . P = (0, 1)
+  raio ........: 1.0000  ->  1.0000   (preservado)
+  ângulo polar : 0.0°  ->  90.0°
+  det(R) ......: 1  (rotação é rígida: não altera tamanhos nem orientação)
+
+  >> RESPOSTA: P' = (0, 1) — o ponto sai do eixo x e vai parar sobre o eixo y.
+  Vale reparar em qual coluna da matriz o resultado está: as colunas de
+  R são exatamente as imagens dos vetores da base. Como P(1,0) É o
+  primeiro vetor da base, P' é literalmente a 1ª coluna de R: (0, 1).
+
+  figura -> ex04_rotacao_ponto.png
+
+============================================================================
+EXERCÍCIO 5 — Rotação de 45° no sentido HORÁRIO do quadrado A(1,1) B(1,4) C(4,4) D(4,1)
+============================================================================
+
+  Sentido horário => θ = -45°.  cos(-45°) = +√2/2 ≈ 0,7071,  sen(-45°) = -√2/2
+
+          |  0.7071   0.7071   0.0000 |
+R(-45°) = | -0.7071   0.7071   0.0000 |
+          |  0.0000   0.0000   1.0000 |
+
+    vértice   original               transformado          
+    --------- ---------------------- ----------------------
+    A         (1, 1)                 (1.4142, 0)           
+    B         (1, 4)                 (3.5355, 2.1213)      
+    C         (4, 4)                 (5.6569, 0)           
+    D         (4, 1)                 (3.5355, -2.1213)     
+
+  área com sinal ..: -9.0000  ->  -9.0000   (módulo e sinal preservados)
+  lados ...........: [3. 3. 3. 3.]  ->  [3. 3. 3. 3.]
+  baricentro ......: (2.5, 2.5)  ->  (3.5355, 0)
+  det(R) ..........: 1.0000
+
+  >> RESPOSTA: A' = (1,4142; 0), B' = (3,5355; 2,1213), C' = (5,6569; 0), D' = (3,5355; -2,1213).
+  O quadrado continua um quadrado de lado 3 e área 9 — rotação é
+  transformação RÍGIDA. Mas repare no baricentro: ele saiu de (2,5; 2,5)
+  e foi para (3,5355; 0). Como a rotação é EM TORNO DA ORIGEM e a figura
+  não está centrada nela, o quadrado além de girar também ORBITA.
+  Girar a figura no próprio lugar exigiria a composição T . R . T⁻¹.
+
+  figura -> ex05_rotacao_poligono.png
+
+============================================================================
+EXERCÍCIO 6 — Reflexão de P(2, 5) em relação ao eixo y
+============================================================================
+
+     | -1   0   0 |
+Fy = |  0   1   0 |
+     |  0   0   1 |
+
+  P  = (2, 5)   ->   P' = Fy . P = (-2, 5)
+  distância ao eixo y : 2.0  ->  2.0   (igual, do outro lado)
+  det(Fy) ............: -1   (NEGATIVO: inverte a orientação)
+
+  >> RESPOSTA: P' = (-2, 5) — só o sinal de x troca; y fica intacto.
+  Refletir em relação ao eixo y significa espelhar a coordenada
+  PERPENDICULAR a esse eixo, que é o x. O det = -1 é a assinatura da
+  reflexão: módulo 1 (não muda tamanho), sinal negativo (vira o avesso).
+
+  figura -> ex06_reflexao_ponto.png
+
+============================================================================
+EXERCÍCIO 7 — Reflexão do triângulo A(2,3) B(4,3) C(3,5) em relação ao eixo x
+============================================================================
+
+     |  1   0   0 |
+Fx = |  0  -1   0 |
+     |  0   0   1 |
+
+    vértice   original               transformado          
+    --------- ---------------------- ----------------------
+    A         (2, 3)                 (2, -3)               
+    B         (4, 3)                 (4, -3)               
+    C         (3, 5)                 (3, -5)               
+
+  área com sinal ..: +2.0000  ->  -2.0000   (mesmo módulo, SINAL TROCADO)
+  sentido .........: anti-horário  ->  horário
+  perímetro .......: 6.4721  ->  6.4721   (preservado)
+  det(Fx) .........: -1
+
+  >> RESPOSTA: A' = (2, -3), B' = (4, -3), C' = (3, -5) — todos os y trocam de sinal.
+  O detalhe que a lista de coordenadas esconde e a área com sinal revela:
+  a ordem A->B->C era ANTI-HORÁRIA (+2) e passou a ser HORÁRIA (-2).
+  Reflexão não é rotação: nenhum giro leva o triângulo original ao
+  refletido sem tirá-lo do plano. É por isso que det = -1, e não +1.
+
+  figura -> ex07_reflexao_triangulo.png
+
+============================================================================
+EXERCÍCIO 8 — Cisalhamento horizontal com k = 2 no ponto P(2, 3)
+============================================================================
+
+         | 1  2  0 |
+H(k=2) = | 0  1  0 |
+         | 0  0  1 |
+
+  x' = x + k.y = 2 + 2 x 3 = 8
+  y' = y       = 3   (o cisalhamento horizontal nunca altera y)
+  P  = (2, 3)   ->   P' = (8, 3)
+  det(H) ......: 1   (preserva área, mas não é rígida)
+
+  retângulo de referência (0, 0)  (2, 0)  (2, 3)  (0, 3)
+    ->  (0, 0)  (2, 0)  (8, 3)  (6, 3)
+    área 6.0 -> 6.0 (igual)   perímetro 10.0000 -> 17.4164
+
+  >> RESPOSTA: P' = (8, 3) — x salta de 2 para 8, y continua 3.
+  O deslocamento horizontal é PROPORCIONAL À ALTURA do ponto: quem está
+  em y = 0 não sai do lugar, quem está em y = 3 anda 6 unidades. É por
+  isso que o retângulo vira um paralelogramo — a base fica parada e o
+  topo desliza. Como base e altura não mudam, a área é preservada
+  (det = 1), mas os ângulos retos se perdem: não é uma transformação rígida.
+
+  figura -> ex08_cisalhamento.png
+
+============================================================================
+EXERCÍCIO 9 — Composição em P(3, 2): translação (1,-1), rotação +90°, escala 2
+============================================================================
+
+  Passo a passo:
+    1) translação (1, -1) : (3, 2)  ->  (4, 1)
+    2) rotação +90°       : (4, 1)  ->  (-1, 4)
+    3) escala uniforme 2  : (-1, 4)  ->  (-2, 8)
+
+  Matriz única equivalente — M = S . R . T
+  (a ordem de escrita é a INVERSA da ordem de aplicação)
+
+    |  0  -2   2 |
+M = |  2   0   2 |
+    |  0   0   1 |
+  M . P = (-2, 8)   (confere com o passo a passo: True)
+
+  Trocando a ordem (escala, depois rotação, depois translação): (-3, 5)
+  Composição de matrizes NÃO é comutativa: (-2, 8) != (-3, 5)
+
+  >> RESPOSTA: P' = (-2, 8).
+  As três transformações viraram UMA matriz 3x3. Esse é o ganho prático
+  das coordenadas homogêneas: numa cena com milhares de vértices, o
+  produto S.R.T é calculado uma vez e cada vértice sofre uma única
+  multiplicação, em vez de três passagens sobre a malha inteira.
+
+  figura -> ex09_composicao_ponto.png
+
+============================================================================
+EXERCÍCIO 10 — Retângulo A(1,1) B(5,1) C(5,3) D(1,3): translação (-2,3), escala (1,5 ; 0,5), reflexão em y
+============================================================================
+
+  Passo 1 — translação (-2, 3)
+    (-1, 4)  (3, 4)  (3, 6)  (-1, 6)
+  Passo 2 — escala não uniforme (1,5 ; 0,5)
+    (-1.5, 2)  (4.5, 2)  (4.5, 3)  (-1.5, 3)
+  Passo 3 — reflexão em relação ao eixo y
+    (1.5, 2)  (-4.5, 2)  (-4.5, 3)  (1.5, 3)
+
+  Matriz única — M = Fy . S . T
+
+    | -1.50   0.00   3.00 |
+M = |  0.00   0.50   1.50 |
+    |  0.00   0.00   1.00 |
+  M aplicada de uma vez confere com o passo a passo: True
+
+    vértice   original               transformado          
+    --------- ---------------------- ----------------------
+    A         (1, 1)                 (1.5, 2)              
+    B         (5, 1)                 (-4.5, 2)             
+    C         (5, 3)                 (-4.5, 3)             
+    D         (1, 3)                 (1.5, 3)              
+
+  área com sinal ..: +8.0000  ->  -6.0000
+  det(M) ..........: -0.7500  = (-1) x 1,5 x 0,5   ->   área x 0.75, orientação invertida
+  dimensões .......: 4 x 2  ->  6.0 x 1.0
+
+  >> RESPOSTA: A' = (1.5, 2), B' = (-4.5, 2), C' = (-4.5, 3), D' = (1.5, 3).
+  Duas leituras que os números entregam de graça:
+   * det(M) = -0,75 prevê a área final sem precisar recalculá-la:
+     8 x 0,75 = 6. E o sinal negativo avisa que a figura foi espelhada.
+   * A translação foi aplicada ANTES da escala, então ela também foi
+     escalada: o (-2, 3) do enunciado aparece na matriz final como
+     (+3; +1,5). Trocar a ordem daria outro retângulo.
+
+  figura -> ex10_composicao_figura.png
+
+============================================================================
+VERIFICAÇÃO ALGÉBRICA — identidades usadas no relatório
+============================================================================
+  [ok] compor(S,R,T) == aplicar T, depois R, depois S
+  [ok] a composição NÃO comuta: S.R.T != T.R.S
+  [ok] T(4,-2) . T(-4,2) == identidade  (translação é invertível)
+  [ok] R(45°) . R(45°) == R(90°)  (rotações somam ângulos)
+  [ok] R(θ) é ortogonal: R . Rᵀ == identidade
+  [ok] Fy . Fy == identidade  (reflexão é a própria inversa)
+  [ok] Fx . Fy == R(180°)  (duas reflexões ortogonais = meia volta)
+  [ok] det(R) = +1 e det(Fx) = -1
+  [ok] |det(M)| prevê o fator de área de uma composição
+  [ok] cisalhamento preserva área: det(H) = 1
+  [ok] T . R . T⁻¹ gira em torno do baricentro (o centro fica parado)
+
+  11/11 verificações passaram.
+
+============================================================================
+FIGURAS DE SÍNTESE
+============================================================================
+  figura -> mapa_matrizes.png
+  figura -> sintese_propriedades.png
+  figura -> nao_comutatividade.png
+  figura -> painel_exercicios.png
+
+============================================================================
+RESUMO DAS RESPOSTAS
+============================================================================
+   1. Translação simples                         P' = (6, 1)
+   2. Escala uniforme                            A'=(2, 2) B'=(6, 2) C'=(4, 8); área x4
+   3. Escala não uniforme                        A'=(2, 0.5) B'=(6, 0.5) C'=(4, 2); área preservada
+   4. Rotação em torno da origem                 P' = (0, 1)
+   5. Rotação de um polígono                     A'=(1,4142; 0) B'=(3,5355; 2,1213) C'=(5,6569; 0) D'=(3,5355; -2,1213)
+   6. Reflexão simples                           P' = (-2, 5)
+   7. Reflexão de um triângulo                   A'=(2, -3) B'=(4, -3) C'=(3, -5)
+   8. Cisalhamento horizontal                    P' = (8, 3)
+   9. Composição de transformações               P' = (-2, 8)
+  10. Combinação de transformações em uma figura A'=(1.5, 2) B'=(-4.5, 2) C'=(-4.5, 3) D'=(1.5, 3)
+
+  10 exercícios resolvidos, 11 verificações algébricas, 14 figuras geradas em 4.27 s.
+  Saída em: E:\AC-Computação-Gráfica\AC2\saida

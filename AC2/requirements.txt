@@ -1,0 +1,12 @@
+# Ambiente usado na execução deste estudo dirigido (Python 3.12, Windows 11)
+#
+# Instalação:
+#   python -m venv .venv
+#   .venv\Scripts\activate            (Windows)   |   source .venv/bin/activate  (Linux/macOS)
+#   pip install -r requirements.txt
+#
+# São só duas dependências: numpy para a álgebra das matrizes 3x3 e
+# matplotlib para a plotagem pedida no enunciado.
+
+numpy==2.5.3
+matplotlib==3.11.1
