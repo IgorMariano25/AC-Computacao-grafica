@@ -4,7 +4,7 @@
 
 ### 📚 Estudos Dirigidos
 
-**Disciplina:** Computação Gráfica I &nbsp;·&nbsp; **Professor:** Jonh Edson
+**Disciplina:** Computação Gráfica &nbsp;·&nbsp; **Professor:** Jonh Edson
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Blender](https://img.shields.io/badge/Blender-4.5%20LTS-EA7600?style=flat-square&logo=blender&logoColor=white)
