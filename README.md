@@ -33,9 +33,6 @@ Cada pasta `ACn/` é uma **entrega autocontida**: o enunciado, o código que pro
 └── 📁 docs/   📚 material da disciplina (não versionado)
 ```
 
-> [!NOTE]
-> O material da disciplina fica em `docs/` e **não é versionado** (consta do [`.gitignore`](.gitignore)). As referências abaixo citam os arquivos com o caminho que têm dentro dessa pasta.
-
 ---
 
 ## 🔍 AC1 — As quatro áreas da Computação Visual
@@ -119,9 +116,6 @@ A cena reúne seis objetos na coleção `AC03_transformacoes` — três planos n
 
 As imagens são renders de câmera (`F12`) em 1920×1080, com sombras projetadas pela luz *sun* — o entregável de imagem renderizada está atendido.
 
-> [!WARNING]
-> **Pendências:** o `.blend` versionado ainda foi salvo a partir de uma **versão anterior** do script (objetos com sufixo `_script`, sem câmera, sem hierarquia e sem o keyframe intermediário) e o `Cube` padrão do Blender continua na cena, fora da coleção — é ele o cubo grande no centro dos dois renders. O enquadramento também corta objetos nas bordas. Reexecutar o script atual, apagar o `Cube` padrão e salvar o `.blend` resolve os três pontos.
-
 <details>
 <summary><b>📖 Referências da AC3</b></summary>
 
@@ -153,9 +147,6 @@ python AC2/executar_tudo.py
 ```
 
 A **AC3 não usa esse ambiente**: ela roda no Python embutido do Blender 4.5 LTS. Abra o `.blend`, vá na aba *Scripting*, carregue [`AC3/AC03_IgorMariano.py`](AC3/AC03_IgorMariano.py) e execute com `Alt+P` — o script limpa a coleção `AC03_transformacoes` antes de recriá-la, então pode ser reexecutado sem duplicar objetos.
-
-> [!TIP]
-> Instruções detalhadas — incluindo a instalação do **PyTorch para CPU** e a exigência de **OpenCV 4.x** na AC1 — estão no README de cada pasta.
 
 <div align="center">
 
