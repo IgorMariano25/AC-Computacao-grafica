@@ -113,12 +113,14 @@ A cena reúne seis objetos na coleção `AC03_transformacoes` — três planos n
 |:---:|---|---|
 | 🟠 | arquivo `.blend` | [`AC03_IgorMariano.blend`](AC3/AC03_IgorMariano.blend) |
 | 🐍 | script Python | [`AC03_IgorMariano.py`](AC3/AC03_IgorMariano.py) |
-| 🖼️ | imagens da cena | [`cena_inicial.png`](AC3/AC03_IgorMariano_cena_inicial.png) · [`cena_final.png`](AC3/AC03_IgorMariano_cena_final.png) |
+| 🖼️ | renders da cena (1920×1080) | [`cena_inicial.png`](AC3/AC03_IgorMariano_cena_inicial.png) · [`cena_final.png`](AC3/AC03_IgorMariano_cena_final.png) |
 | 📝 | texto de entrega | [`AC03_Relatorio.md`](AC3/AC03_Relatorio.md) |
 | ❓ | cinco questões teóricas | [`AC03_Questoes_Teoricas.md`](AC3/AC03_Questoes_Teoricas.md) |
 
+As imagens são renders de câmera (`F12`) em 1920×1080, com sombras projetadas pela luz *sun* — o entregável de imagem renderizada está atendido.
+
 > [!WARNING]
-> **Pendências:** o `.blend` versionado foi salvo a partir de uma **versão anterior** do script (objetos ainda com sufixo `_script`, sem câmera, sem hierarquia e sem o keyframe intermediário) e ainda contém o `Cube` padrão do Blender fora da coleção. As duas imagens são **capturas do viewport**, não renders de câmera (`F12`) como o enunciado pede. Reexecutar o script atual e salvar novamente resolve os dois pontos.
+> **Pendências:** o `.blend` versionado ainda foi salvo a partir de uma **versão anterior** do script (objetos com sufixo `_script`, sem câmera, sem hierarquia e sem o keyframe intermediário) e o `Cube` padrão do Blender continua na cena, fora da coleção — é ele o cubo grande no centro dos dois renders. O enquadramento também corta objetos nas bordas. Reexecutar o script atual, apagar o `Cube` padrão e salvar o `.blend` resolve os três pontos.
 
 <details>
 <summary><b>📖 Referências da AC3</b></summary>

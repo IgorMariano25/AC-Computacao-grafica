@@ -9,13 +9,14 @@
 |---|---|
 | [`AC03_IgorMariano.blend`](AC03_IgorMariano.blend) | cena "Parque Geométrico" (Blender 4.5 LTS, header `BLENDER-v405`) |
 | [`AC03_IgorMariano.py`](AC03_IgorMariano.py) | script que cria os objetos, transforma, anima e monta câmera e luz |
-| [`AC03_IgorMariano_cena_inicial.png`](AC03_IgorMariano_cena_inicial.png) | cena no frame 1 |
-| [`AC03_IgorMariano_cena_final.png`](AC03_IgorMariano_cena_final.png) | cena no frame 120 |
+| [`AC03_IgorMariano_cena_inicial.png`](AC03_IgorMariano_cena_inicial.png) | render da cena no frame 1 (1920×1080) |
+| [`AC03_IgorMariano_cena_final.png`](AC03_IgorMariano_cena_final.png) | render da cena no frame 120 (1920×1080) |
 | [`AC03_Questoes_Teoricas.md`](AC03_Questoes_Teoricas.md) | respostas às cinco questões teóricas |
 
-As duas imagens são o mesmo enquadramento em frames diferentes, e é a comparação
-entre elas que mostra a animação: o círculo transladou em X e girou em Z, o cubo
-mudou de escala e de orientação, e o triângulo acompanhou o círculo por herança.
+Os dois renders são o mesmo enquadramento de câmera em frames diferentes, e é a
+comparação entre eles que mostra a animação: o cubo (à esquerda) saiu de uma forma
+alongada para uma quase cúbica, mudando escala e orientação ao mesmo tempo, e o
+círculo transladou em X levando o triângulo junto por herança.
 
 | Frame 1 | Frame 120 |
 |---|---|
@@ -46,7 +47,7 @@ numéricas, a hierarquia, os keyframes, a câmera e a luz — tudo em
 [`AC03_IgorMariano.py`](AC03_IgorMariano.py), usando `math.radians()` para converter
 os ângulos de graus para radianos. A parte manual, feita pela interface do Blender,
 foi o ajuste fino de enquadramento com `G` e `R`, a conferência das transformações
-no viewport e a captura das imagens da cena.
+no viewport e a geração dos dois renders com `F12`.
 
 ## Referências
 
