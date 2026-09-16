@@ -23,13 +23,13 @@ Cada pasta `ACn/` é uma **entrega autocontida**: o enunciado, o código que pro
 |:---:|---|---|:---:|
 | [**AC1**](AC1/) | 🔍 As quatro áreas da Computação Visual | ModernGL · OpenCV · YOLOv8 · VTK | ✅ **concluída** |
 | [**AC2**](AC2/) | 📐 Transformações geométricas 2D | NumPy · Matplotlib | ✅ **concluída** |
-| [**AC3**](AC3/) | 🧊 Transformações 2D/3D no Blender | Blender 4.5 LTS · `bpy` | 📥 enunciado recebido |
+| [**AC3**](AC3/) | 🧊 Transformações 2D/3D no Blender | Blender 4.5 LTS · `bpy` | 🚧 **em revisão** |
 
 ```
 📦 AC-Computação-Gráfica
 ├── 📁 AC1/    🔍 quatro áreas       → 4 programas + relatório em PDF/HTML
 ├── 📁 AC2/    📐 transformações 2D  → 10 exercícios + 14 figuras
-├── 📁 AC3/    🧊 Blender            → enunciado
+├── 📁 AC3/    🧊 Blender            → cena .blend + script bpy + 2 imagens
 └── 📁 docs/   📚 material da disciplina (não versionado)
 ```
 
@@ -101,26 +101,33 @@ Além das respostas, a entrega mede o que cada transformação preserva (área, 
 
 > 🎯 **Objetivo** ([`AC3/AC03.md`](AC3/AC03.md)): montar a mini-cena *"Parque Geométrico"* com objetos 2D (quadrado, triângulo, círculo) e 3D (cubo, cilindro, esfera UV), aplicando translação, rotação e escala pela interface **e** por script Python; distinguir espaço local e global; animar 3 a 6 segundos com keyframes.
 
-📦 **Entregáveis pedidos:**
+| Frame 1 | Frame 120 |
+|---|---|
+| ![Cena inicial](AC3/AC03_IgorMariano_cena_inicial.png) | ![Cena final](AC3/AC03_IgorMariano_cena_final.png) |
 
-| | Item |
-|:---:|---|
-| 🟠 | o arquivo `.blend` |
-| 🐍 | o script `.py` |
-| 🖼️ | um render estático da cena final |
-| 📝 | um texto curto explicando o que foi feito à mão e o que foi feito por código |
-| ❓ | mais cinco questões teóricas |
+A cena reúne seis objetos na coleção `AC03_transformacoes` — três planos no XY e três sólidos — e tudo é construído por script: criação, transformações, hierarquia, keyframes, câmera e luz. Comparando os dois frames, o círculo transladou em X e girou 180° em Z, o cubo mudou de escala e orientação em eixos diferentes, e o triângulo acompanhou o círculo por ser seu **filho** (bônus de transformação composta, junto com o easing `EASE_IN_OUT` e o keyframe intermediário no frame 60).
+
+📦 **Entregáveis:**
+
+| | Item | Arquivo |
+|:---:|---|---|
+| 🟠 | arquivo `.blend` | [`AC03_IgorMariano.blend`](AC3/AC03_IgorMariano.blend) |
+| 🐍 | script Python | [`AC03_IgorMariano.py`](AC3/AC03_IgorMariano.py) |
+| 🖼️ | imagens da cena | [`cena_inicial.png`](AC3/AC03_IgorMariano_cena_inicial.png) · [`cena_final.png`](AC3/AC03_IgorMariano_cena_final.png) |
+| 📝 | texto de entrega | [`AC03_Relatorio.md`](AC3/AC03_Relatorio.md) |
+| ❓ | cinco questões teóricas | [`AC03_Questoes_Teoricas.md`](AC3/AC03_Questoes_Teoricas.md) |
 
 > [!WARNING]
-> **Estado:** só o enunciado está no repositório; a cena, o script e o render ainda **não foram produzidos**.
+> **Pendências:** o `.blend` versionado foi salvo a partir de uma **versão anterior** do script (objetos ainda com sufixo `_script`, sem câmera, sem hierarquia e sem o keyframe intermediário) e ainda contém o `Cube` padrão do Blender fora da coleção. As duas imagens são **capturas do viewport**, não renders de câmera (`F12`) como o enunciado pede. Reexecutar o script atual e salvar novamente resolve os dois pontos.
 
 <details>
 <summary><b>📖 Referências da AC3</b></summary>
 
 <br>
 
-* **Material:** `aula04/tg2d3d.pdf` e `aula05/tg3d.md` (a teoria das transformações que a atividade exercita na prática) · `aula04/Aula5.Ex3–Ex6` (cubo, pirâmide, cilindro e esfera em transformações 3D) · `blender/blender.md` e `blender/modelagem.md` · `blender/scripts/` (scripts prontos de cena, transformação, animação, hierarquia e render — base direta para a parte de automação)
+* **Material:** `aula04/tg2d3d.pdf` e `aula05/tg3d.md` (a teoria das transformações que a atividade exercita na prática) · `aula04/Aula5.Ex3–Ex6` (cubo, pirâmide, cilindro e esfera em transformações 3D) · `blender/blender.md` e `blender/modelagem.md` · `blender/scripts/02_cube_transform.py`, `05_rotation_scale_animation.py`, `08_parenting_hierarchy.py` e `09_render_sequence.py` (base direta da automação, da animação, da hierarquia e do render)
 * **Externas:** [Blender Python API (`bpy`)](https://docs.blender.org/api/current/) · [Blender Manual](https://docs.blender.org/manual/en/latest/)
+* **Nesta pasta:** [`AC03_Relatorio.md`](AC3/AC03_Relatorio.md) (texto de entrega, com as duas imagens lado a lado) · [`AC03_Questoes_Teoricas.md`](AC3/AC03_Questoes_Teoricas.md) (as cinco questões)
 
 </details>
 
@@ -142,6 +149,8 @@ pip install -r AC1/requirements.txt    # ou AC2/requirements.txt
 python AC1/executar_tudo.py
 python AC2/executar_tudo.py
 ```
+
+A **AC3 não usa esse ambiente**: ela roda no Python embutido do Blender 4.5 LTS. Abra o `.blend`, vá na aba *Scripting*, carregue [`AC3/AC03_IgorMariano.py`](AC3/AC03_IgorMariano.py) e execute com `Alt+P` — o script limpa a coleção `AC03_transformacoes` antes de recriá-la, então pode ser reexecutado sem duplicar objetos.
 
 > [!TIP]
 > Instruções detalhadas — incluindo a instalação do **PyTorch para CPU** e a exigência de **OpenCV 4.x** na AC1 — estão no README de cada pasta.
