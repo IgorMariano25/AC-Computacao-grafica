@@ -1,0 +1,16 @@
+{
+  "unidade": "m",
+  "largura_interna_estimada": 14.6,
+  "comprimento_interno_estimado": 20.8,
+  "altura_forro_estimada": 4.2,
+  "altura_palco": 0.55,
+  "fileiras_estimadas": 12,
+  "assentos_por_fileira": 16,
+  "assentos_frontais": 3,
+  "total_poltronas_modeladas": 195,
+  "objetos": 211,
+  "malhas_unicas": 17,
+  "triangulos_geometria_unica": 72157,
+  "triangulos_instanciados": 1585357,
+  "limites": "Dimensoes, contagem de assentos, detalhes ocultos e emblemas de bandeiras sao aproximados."
+}
