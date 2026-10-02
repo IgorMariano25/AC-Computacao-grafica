@@ -9,7 +9,7 @@
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Blender](https://img.shields.io/badge/Blender-4.5%20LTS-EA7600?style=flat-square&logo=blender&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-11-0078D4?style=flat-square&logo=windows&logoColor=white)
-![Entregas](https://img.shields.io/badge/entregas-2%20de%206-brightgreen?style=flat-square)
+![Entregas](https://img.shields.io/badge/entregas-4%20de%206-brightgreen?style=flat-square)
 
 </div>
 
@@ -23,8 +23,9 @@ Cada pasta `ACn/` é uma **entrega autocontida**: o enunciado, o código que pro
 |:---:|---|---|:---:|
 | [**AC1**](AC1/) | 🔍 As quatro áreas da Computação Visual | ModernGL · OpenCV · YOLOv8 · VTK | ✅ **concluída** |
 | [**AC2**](AC2/) | 📐 Transformações geométricas 2D | NumPy · Matplotlib | ✅ **concluída** |
-| [**AC3**](AC3/) | 🧊 Transformações 2D/3D no Blender | Blender 4.5 LTS · `bpy` | 🚧 **em revisão** |
-| [**AP1**](AP1/) | 🏛️ Conceito e modelagem — *Ibmec em 15 segundos* | Blender 4.5 LTS | ✅ **concluída** |
+| [**AC3**](AC3/) | 🧊 Transformações 2D/3D no Blender | Blender 4.5 LTS | ✅ **concluída** |
+| [**AP1**](AP1/) | 🧱 Modelagem do auditório do Ibmec Barra - RJ | Blender 4.5 LTS | ✅ **concluída** |
+
 
 ```
 📦 AC-Computação-Gráfica
