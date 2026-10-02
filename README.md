@@ -24,12 +24,14 @@ Cada pasta `ACn/` é uma **entrega autocontida**: o enunciado, o código que pro
 | [**AC1**](AC1/) | 🔍 As quatro áreas da Computação Visual | ModernGL · OpenCV · YOLOv8 · VTK | ✅ **concluída** |
 | [**AC2**](AC2/) | 📐 Transformações geométricas 2D | NumPy · Matplotlib | ✅ **concluída** |
 | [**AC3**](AC3/) | 🧊 Transformações 2D/3D no Blender | Blender 4.5 LTS · `bpy` | 🚧 **em revisão** |
+| [**AP1**](AP1/) | 🏛️ Conceito e modelagem — *Ibmec em 15 segundos* | Blender 4.5 LTS | ✅ **concluída** |
 
 ```
 📦 AC-Computação-Gráfica
 ├── 📁 AC1/    🔍 quatro áreas       → 4 programas + relatório em PDF/HTML
 ├── 📁 AC2/    📐 transformações 2D  → 10 exercícios + 14 figuras
 ├── 📁 AC3/    🧊 Blender            → cena .blend + script bpy + 2 imagens
+├── 📁 AP1/    🏛️ Auditório Ibmec    → cena .blend + relatório + capturas e storyboard
 └── 📁 docs/   📚 material da disciplina (não versionado)
 ```
 
@@ -129,6 +131,44 @@ As imagens são renders de câmera (`F12`) em 1920×1080, com sombras projetadas
 
 ---
 
+## 🏛️ AP1 — Conceito e modelagem: *Ibmec em 15 segundos*
+
+> 🎯 **Objetivo** ([`AP1/AP1.md`](AP1/AP1.md)): construir no **Blender 4.5 LTS** a cena-conceito de uma peça de 15 s (24 fps, 360 frames) que destaque a marca **Ibmec**, com **exatamente três objetos autorais**, câmera principal pronta para a AP2 e storyboard de três momentos. Animação, materiais e render ficam para a AP2.
+
+![Enquadramento principal](AP1/capturas/01_enquadramento_principal.png)
+
+A cena é um auditório de formatura com a marca Ibmec em destaque, na coleção `AP1_Ibmec_Conceito`. A curva original de `Logo-Ibmec-3D.blend` foi reaproveitada sem alterar a forma, só posição, orientação e escala. A entrega é **estática**: os marcadores na timeline só registram o planejamento da AP2.
+
+| Púlpito de pitch | Capelo de formatura | Diploma Ibmec |
+|---|---|---|
+| ![Púlpito](AP1/capturas/02_pulpito_pitch.png) | ![Capelo](AP1/capturas/03_capelo_formatura.png) | ![Diploma](AP1/capturas/04_diploma_ibmec.png) |
+
+As três malhas usam **grupos de vértices** para identificar componentes (a folha do diploma pode ser separada para animar na AP2). Púlpito e capelo mantêm o **Bevel** editável, e o **Solidify** do diploma foi aplicado antes da união das malhas.
+
+📦 **Entregáveis:**
+
+| | Item | Arquivo |
+|:---:|---|---|
+| 🟠 | arquivo `.blend` | [`AP1_IgorRodrigues.blend`](AP1/AP1_IgorRodrigues.blend) |
+| 🖼️ | capturas do enquadramento e dos objetos | [`capturas/`](AP1/capturas/) |
+| 🎬 | storyboard de 15 s e guias conceituais | [`conceito/`](AP1/conceito/) |
+| 📝 | relatório com a justificativa dos objetos | [`Relatorio_AP1_IgorRodrigues.md`](AP1/Relatorio_AP1_IgorRodrigues.md) |
+
+📄 Detalhes de uso e de modelagem em [`AP1/README.md`](AP1/README.md).
+
+<details>
+<summary><b>📖 Referências da AP1</b></summary>
+
+<br>
+
+* **Imagens de referência:** [`AP1/referencias/`](AP1/referencias/) (plateia, corredor central, palco e púlpito reais), usadas no processo de modelagem
+* **Marca:** [`Logo-Ibmec-3D.blend`](AP1/Logo-Ibmec-3D.blend), curva original reaproveitada
+* **Externas:** [Blender Manual](https://docs.blender.org/manual/en/latest/)
+
+</details>
+
+---
+
 ## 🚀 Como executar
 
 Cada atividade traz o seu próprio `requirements.txt` com as versões exatas usadas na execução registrada (🐍 Python 3.12 · 🪟 Windows 11):
@@ -148,10 +188,12 @@ python AC2/executar_tudo.py
 
 A **AC3 não usa esse ambiente**: ela roda no Python embutido do Blender 4.5 LTS. Abra o `.blend`, vá na aba *Scripting*, carregue [`AC3/AC03_IgorMariano.py`](AC3/AC03_IgorMariano.py) e execute com `Alt+P` — o script limpa a coleção `AC03_transformacoes` antes de recriá-la, então pode ser reexecutado sem duplicar objetos.
 
+A **AP1** também é só o `.blend`: abra [`AP1/AP1_IgorRodrigues.blend`](AP1/AP1_IgorRodrigues.blend) no Blender 4.5 LTS (`Numpad 0` para a câmera principal, `F12` para renderizar). Nenhum script é necessário.
+
 <div align="center">
 
 ---
 
-🎓 **Computação Gráfica I** &nbsp;·&nbsp; ✅ AC1 &nbsp;·&nbsp; ✅ AC2 &nbsp;·&nbsp; 🚧 AC3
+🎓 **Computação Gráfica I** &nbsp;·&nbsp; ✅ AC1 &nbsp;·&nbsp; ✅ AC2 &nbsp;·&nbsp; 🚧 AC3 &nbsp;·&nbsp; ✅ AP1
 
 </div>
