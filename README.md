@@ -34,7 +34,7 @@ Cada pasta `ACn/` é uma **entrega autocontida**: o enunciado, o código que pro
 ├── 📁 AC2/    📐 transformações 2D  → 10 exercícios + 14 figuras
 ├── 📁 AC3/    🧊 Blender            → cena .blend + script bpy + 2 imagens
 ├── 📁 AP1/    🏛️ Auditório Ibmec    → cena .blend + relatório + capturas e storyboard
-├── 📁 AC4/    💡 iluminação         → cena .blend + 4 scripts bpy + render final
+├── 📁 AC4/    💡 iluminação         → cena .blend + 4 scripts bpy + render final + relatório
 └── 📁 docs/   📚 material da disciplina (não versionado)
 ```
 
@@ -198,10 +198,10 @@ A iluminação é fixa: uma **luz principal Area** em disco de 1 m (300 W, *spre
 | 🐍 | scripts Python (`01` → `04`) | [`scripts/`](AC4/scripts/) |
 | 🖼️ | render final (1920×1080, EEVEE) | [`AC04_IgorMariano_render_final.png`](AC4/AC04_IgorMariano_render_final.png) |
 | 🔲 | imagem comparativa dos três materiais | 🚧 pendente (etapa 3) |
-| 📝 | relatório | 🚧 pendente |
+| 📝 | relatório: objetos, materiais, luzes, comparação e limitações | [`AC04_Relatorio.md`](AC4/AC04_Relatorio.md) |
 
 > [!NOTE]
-> A etapa 3 — observar no modo *Rendered*, girar a luz temporariamente e comparar os materiais — fica fora da automação e ainda não foi feita. Dela saem a imagem comparativa e a análise do relatório.
+> A etapa 3 — observar no modo *Rendered*, girar a luz temporariamente e comparar os materiais — fica fora da automação e ainda não foi feita; dela sai a imagem comparativa. A comparação do relatório se baseia no render final e nas prévias feitas ao posicionar a luz.
 
 <details>
 <summary><b>📖 Referências da AC4</b></summary>
