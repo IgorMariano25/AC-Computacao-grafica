@@ -9,7 +9,7 @@
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Blender](https://img.shields.io/badge/Blender-4.5%20LTS-EA7600?style=flat-square&logo=blender&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-11-0078D4?style=flat-square&logo=windows&logoColor=white)
-![Entregas](https://img.shields.io/badge/entregas-4%20de%206-brightgreen?style=flat-square)
+![Entregas](https://img.shields.io/badge/entregas-4%20de%207-brightgreen?style=flat-square)
 
 </div>
 
@@ -25,6 +25,7 @@ Cada pasta `ACn/` é uma **entrega autocontida**: o enunciado, o código que pro
 | [**AC2**](AC2/) | 📐 Transformações geométricas 2D | NumPy · Matplotlib | ✅ **concluída** |
 | [**AC3**](AC3/) | 🧊 Transformações 2D/3D no Blender | Blender 4.5 LTS | ✅ **concluída** |
 | [**AP1**](AP1/) | 🧱 Modelagem do auditório do Ibmec Barra - RJ | Blender 4.5 LTS | ✅ **concluída** |
+| [**AC4**](AC4/) | 💡 Modelos de iluminação: Lambert, Phong e Blinn-Phong | Blender 4.5 LTS · EEVEE | 🚧 **em andamento** |
 
 
 ```
@@ -33,6 +34,7 @@ Cada pasta `ACn/` é uma **entrega autocontida**: o enunciado, o código que pro
 ├── 📁 AC2/    📐 transformações 2D  → 10 exercícios + 14 figuras
 ├── 📁 AC3/    🧊 Blender            → cena .blend + script bpy + 2 imagens
 ├── 📁 AP1/    🏛️ Auditório Ibmec    → cena .blend + relatório + capturas e storyboard
+├── 📁 AC4/    💡 iluminação         → cena .blend + 4 scripts bpy + render final
 └── 📁 docs/   📚 material da disciplina (não versionado)
 ```
 
@@ -170,6 +172,51 @@ As três malhas usam **grupos de vértices** para identificar componentes (a fol
 
 ---
 
+## 💡 AC4 — Evolução da cena: modelos de iluminação
+
+> 🎯 **Objetivo** ([enunciado no site da disciplina](https://jonh-carvalho.github.io/CG_26.2_8001/Avalia/AC04/)): evoluir a cena da AP1 no **Blender 4.5 LTS** aplicando materiais inspirados nos modelos **Lambert**, **Phong** e **Blinn-Phong** — um em cada objeto autoral, sob a mesma iluminação — e observar as componentes difusa e especular, sem alterar a composição nem a palavra **Ibmec**.
+
+![Render final da AC4](AC4/AC04_IgorMariano_render_final.png)
+
+A cena é uma **cópia** de `AP1_IgorRodrigues.blend` — o arquivo da AP1 não é alterado — e tudo é feito por quatro scripts `bpy` encadeados pelo `executar_ac04.py`: a cópia, a iluminação, os materiais e o render. O motor passa do Workbench da AP1 para o **EEVEE**, que calcula as componentes difusa e especular, com gerenciamento de cor **AgX** para não estourar os brilhos.
+
+| Objeto autoral | Material | Cor-base | Roughness | Specular IOR Level | Aparência esperada |
+|---|---|---|:---:|:---:|---|
+| 🎤 Púlpito | `MAT_Lambert` | 🔵 `#3366CC` | 1.0 | 0.0 | fosca, só difusa — `I = kd·(N·L)` |
+| 🎓 Capelo | `MAT_Phong` | 🔴 `#C0392B` | 0.2 | 0.5 | difusa + brilho concentrado |
+| 📜 Diploma | `MAT_BlinnPhong` | 🟢 `#2E9E4F` | 0.1 | 0.8 | brilho mais estreito e intenso |
+
+Os valores são os das práticas da aula 11. No Blender 4.5, o antigo *Specular* do **Principled BSDF** se chama *Specular IOR Level*. Por ser um shader físico, o Principled BSDF não implementa literalmente as equações de Phong e Blinn-Phong: as configurações são **aproximações visuais**. O `MAT_Lambert` traz também um nó **Diffuse BSDF** desconectado, como alternativa direta para a componente difusa.
+
+A iluminação é fixa: uma **luz principal Area** em disco de 1 m (300 W, *spread* de 120°) e uma **luz de preenchimento Area** de 4 m (50 W), na coleção `AC04_Iluminacao`. A luz *Sun* foi descartada porque o auditório é fechado e o forro, a 4,2 m, a bloquearia. A principal fica a 3,2 m, do lado do capelo e do diploma: assim o vetor médio **H** entre luz e câmera se aproxima das normais da copa e do canudo, e o brilho aparece para a câmera. As três luzes da AP1 continuam no arquivo, desativadas.
+
+📦 **Entregáveis:**
+
+| | Item | Arquivo |
+|:---:|---|---|
+| 🟠 | arquivo `.blend` | [`AC04_IgorMariano.blend`](AC4/AC04_IgorMariano.blend) |
+| 🐍 | scripts Python (`01` → `04`) | [`scripts/`](AC4/scripts/) |
+| 🖼️ | render final (1920×1080, EEVEE) | [`AC04_IgorMariano_render_final.png`](AC4/AC04_IgorMariano_render_final.png) |
+| 🔲 | imagem comparativa dos três materiais | 🚧 pendente (etapa 3) |
+| 📝 | relatório | 🚧 pendente |
+
+> [!NOTE]
+> A etapa 3 — observar no modo *Rendered*, girar a luz temporariamente e comparar os materiais — fica fora da automação e ainda não foi feita. Dela saem a imagem comparativa e a análise do relatório.
+
+<details>
+<summary><b>📖 Referências da AC4</b></summary>
+
+<br>
+
+* **Práticas da aula 11:** [cena](https://jonh-carvalho.github.io/CG_26.2_8001/Disciplina/docs/aula11/pratica/01_cena/) · [Lambert](https://jonh-carvalho.github.io/CG_26.2_8001/Disciplina/docs/aula11/pratica/2.1_lambert/) · [Phong](https://jonh-carvalho.github.io/CG_26.2_8001/Disciplina/docs/aula11/pratica/2.2_phong/) · [Blinn-Phong](https://jonh-carvalho.github.io/CG_26.2_8001/Disciplina/docs/aula11/pratica/2.3_blinn-phong/) (valores de *Roughness* e *Specular* dos três materiais)
+* **Material:** `aula12/Modelo_Iluminação.md` (roteiro dos modelos de iluminação no Blender)
+* **Base:** [`AP1/AP1_IgorRodrigues.blend`](AP1/AP1_IgorRodrigues.blend) (cena de origem, só leitura)
+* **Externas:** [Principled BSDF — Blender 4.5](https://docs.blender.org/manual/en/4.5/render/shader_nodes/shader/principled.html) · [Luzes — Blender 4.5](https://docs.blender.org/manual/en/4.5/render/lights/light_object.html) · [Blender Python API (`bpy`)](https://docs.blender.org/api/current/)
+
+</details>
+
+---
+
 ## 🚀 Como executar
 
 Cada atividade traz o seu próprio `requirements.txt` com as versões exatas usadas na execução registrada (🐍 Python 3.12 · 🪟 Windows 11):
@@ -191,10 +238,16 @@ A **AC3 não usa esse ambiente**: ela roda no Python embutido do Blender 4.5 LTS
 
 A **AP1** também é só o `.blend`: abra [`AP1/AP1_IgorRodrigues.blend`](AP1/AP1_IgorRodrigues.blend) no Blender 4.5 LTS (`Numpad 0` para a câmera principal, `F12` para renderizar). Nenhum script é necessário.
 
+A **AC4** também roda no Python do Blender 4.5 LTS e parte da AP1: abra [`AP1/AP1_IgorRodrigues.blend`](AP1/AP1_IgorRodrigues.blend), vá na aba *Scripting*, carregue [`AC4/scripts/executar_ac04.py`](AC4/scripts/executar_ac04.py) e execute com `Alt+P`. O primeiro script salva a cópia `AC4/AC04_IgorMariano.blend` e passa a trabalhar nela; os scripts 02 a 04 se recusam a rodar em outro arquivo, então o `.blend` da AP1 nunca é sobrescrito. Para rodar sem abrir a interface, a partir da raiz do repositório:
+
+```bash
+blender -b AP1/AP1_IgorRodrigues.blend --python AC4/scripts/executar_ac04.py
+```
+
 <div align="center">
 
 ---
 
-🎓 **Computação Gráfica I** &nbsp;·&nbsp; ✅ AC1 &nbsp;·&nbsp; ✅ AC2 &nbsp;·&nbsp; 🚧 AC3 &nbsp;·&nbsp; ✅ AP1
+🎓 **Computação Gráfica I** &nbsp;·&nbsp; ✅ AC1 &nbsp;·&nbsp; ✅ AC2 &nbsp;·&nbsp; ✅ AC3 &nbsp;·&nbsp; ✅ AP1 &nbsp;·&nbsp; 🚧 AC4
 
 </div>
