@@ -1,0 +1,25 @@
+{
+  "resolucao": [
+    1024,
+    1024
+  ],
+  "origem": "Algoritmos originais de scripts/gerar_texturas.py, preparados com assistência de IA para esta atividade.",
+  "licenca": "CC0-1.0 para os seis mapas gerados neste pacote; sem imagens de terceiros.",
+  "madeira": {
+    "roughness": [
+      0.38,
+      0.58
+    ],
+    "metallic": 0,
+    "normal_strength": 0.25
+  },
+  "tecido": {
+    "roughness": [
+      0.72,
+      0.87
+    ],
+    "metallic": 0,
+    "normal_strength": 0.18
+  },
+  "cor": "BaseColor sRGB; Roughness e Normal Non-Color; Normal tangente OpenGL (+Y)."
+}
