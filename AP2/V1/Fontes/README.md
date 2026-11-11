@@ -1,0 +1,1 @@
+Código opcional para regenerar a geometria. Execute em Python 3 com numpy e Pillow instalados: python Gerar_modelos.py. Não é um script bpy e não precisa ser executado para importar os GLB. Saída: subpasta gerado/auditorio_ap1. Parâmetros e medidas podem ser editados diretamente no código. As posições X são espelhadas na exportação para corresponder à orientação das fotos.
