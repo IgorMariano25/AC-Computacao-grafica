@@ -6,7 +6,7 @@
   "base": "AP2/V1/Fontes/Auditorio_AP2.blend",
   "base_sha256": "d53dfa2612c6891293ffdd181b7fe78bbe4cd9e96d4e90c25a7ccd8a1a1135ae",
   "saida": "AP2_IgorMariano.blend",
-  "saida_sha256": "a2f7b16359f539f18b12be3f5efede99947b66c31f65b8d74af973807f7c661c",
+  "saida_sha256": "9b77c4f6ad4b1c4b0f3b2193c9e26cba1303d63a7111f8531187302c9739eb96",
   "render_executado": false,
   "validacao_visual": false,
   "geometria_hierarquia_colecoes_preservadas": true,
@@ -727,7 +727,7 @@
     {
       "nome": "madeira_BaseColor.png",
       "packed": true,
-      "path": "//../V1/Fontes/texturas/madeira_BaseColor.png"
+      "path": "//texturas/madeira_BaseColor.png"
     },
     {
       "nome": "Madeira_mel",
@@ -737,7 +737,7 @@
     {
       "nome": "madeira_Roughness.png",
       "packed": true,
-      "path": "//../V1/Fontes/texturas/madeira_Roughness.png"
+      "path": "//texturas/madeira_Roughness.png"
     },
     {
       "nome": "Tecido_azul",
@@ -747,22 +747,22 @@
     {
       "nome": "tecido_BaseColor.png",
       "packed": true,
-      "path": "//../V1/Fontes/texturas/tecido_BaseColor.png"
+      "path": "//texturas/tecido_BaseColor.png"
     },
     {
       "nome": "tecido_BaseColor.png.001",
       "packed": true,
-      "path": "//../V1/Fontes/texturas/tecido_BaseColor.png"
+      "path": "//texturas/tecido_BaseColor.png"
     },
     {
       "nome": "tecido_Roughness.png",
       "packed": true,
-      "path": "//../V1/Fontes/texturas/tecido_Roughness.png"
+      "path": "//texturas/tecido_Roughness.png"
     },
     {
       "nome": "tecido_Roughness.png.001",
       "packed": true,
-      "path": "//../V1/Fontes/texturas/tecido_Roughness.png"
+      "path": "//texturas/tecido_Roughness.png"
     },
     {
       "nome": "Terceira_bandeira_estilizada",
