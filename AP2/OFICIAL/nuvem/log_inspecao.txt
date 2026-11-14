@@ -1,5 +1,0 @@
-INSPECAO_CONCLUIDA 266 objetos; nenhum render executado.
-Blender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:38:15)
-Read blend: "/home/runner/work/AC-Computacao-grafica/AC-Computacao-grafica/AP2/V1/Fontes/Auditorio_AP2.blend"
-
-Blender quit

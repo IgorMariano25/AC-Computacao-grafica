@@ -1,8 +1,9 @@
 # AP2 — Ibmec: Da Plateia ao Palco da Vida Profissional
 
-Aluno: Igor Mariano. Os arquivos históricos da AP1 usam o nome Igor Rodrigues.
+Aluno: Igor Mariano Lopes Rodrigues
+Matrícula: 202407095992 
 
-**Estado: preparado e verificado na nuvem, sem renderização.** Entrega: `AP2_IgorMariano.blend`, gerado e reaberto no Blender 4.5.3 LTS. A aparência final depende da renderização posterior.
+**Estado: preparado e verificado na nuvem, sem renderização.** Entrega: `AP2_IgorRodrigues.blend`, gerado e reaberto no Blender 4.5 LTS. 
 
 ## Fontes e escolha da base
 
