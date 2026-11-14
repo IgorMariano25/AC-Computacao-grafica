@@ -445,7 +445,8 @@ jobs:
           def main():
               if bpy.app.version[:2]!=(4,5): raise RuntimeError('Requer Blender 4.5 LTS')
               if sha(BASE)!=BASE_SHA: raise RuntimeError('A base difere da versao examinada.')
-              if FINAL.exists(): raise FileExistsError('Saida existente: preserve-a antes de executar.')
+              if FINAL.exists() and sha(FINAL) != 'a2f7b16359f539f18b12be3f5efede99947b66c31f65b8d74af973807f7c661c':
+                  raise FileExistsError('Saida existente diferente da revisao intermediaria conhecida; preserve-a antes de executar.')
               bpy.ops.wm.open_mainfile(filepath=str(BASE),load_ui=False,use_scripts=False)
               s=bpy.context.scene;s.frame_set(1)
               before_geometry=geometry_record();before_actions=action_record();before_markers=markers()
@@ -461,7 +462,7 @@ jobs:
               assert animation_samples(names)==before_animation,'Transformacoes/cameras/shape keys alteradas nos 360 quadros'
               s.frame_set(1)
               bpy.context.preferences.filepaths.save_version=0
-              bpy.ops.wm.save_as_mainfile(filepath=str(FINAL),compress=True)
+              bpy.ops.wm.save_as_mainfile(filepath=str(FINAL),compress=True,relative_remap=False)
               bpy.ops.wm.open_mainfile(filepath=str(FINAL),load_ui=False,use_scripts=False)
               assert action_record()==before_actions,'Acoes divergentes depois de reabrir'
               assert markers()==before_markers,'Marcadores divergentes depois de reabrir'
@@ -470,6 +471,15 @@ jobs:
               assert all(after[name]==value for name,value in before_geometry.items()),'Geometria divergente depois de reabrir'
               images=check_images()
               assert sha(BASE)==BASE_SHA,'Fonte alterada'
+              saved_scene=bpy.context.scene
+              assert saved_scene.render.filepath=='//render_final/AP2_IgorMariano.mp4','Saida de video remapeada indevidamente'
+              assert (saved_scene.render.resolution_x,saved_scene.render.resolution_y,saved_scene.render.resolution_percentage)==(1920,1200,100)
+              assert (saved_scene.frame_start,saved_scene.frame_end,saved_scene.render.fps,saved_scene.render.fps_base)==(1,360,24,1)
+              assert saved_scene.render.image_settings.file_format=='FFMPEG'
+              assert saved_scene.render.ffmpeg.format=='MPEG4' and saved_scene.render.ffmpeg.codec=='H264'
+              for im in bpy.data.images:
+                  if im.name.startswith(('madeira_','tecido_')):
+                      assert im.filepath.startswith('//texturas/'),'Caminho relativo de textura invalido: '+im.filepath
               report={'status':'PREPARADO_SEM_RENDER','blender':bpy.app.version_string,'ambiente':'GitHub Actions github-hosted','plataforma':platform.platform(),'base':'AP2/V1/Fontes/Auditorio_AP2.blend','base_sha256':BASE_SHA,'saida':FINAL.name,'saida_sha256':sha(FINAL),'render_executado':False,'validacao_visual':False,'geometria_hierarquia_colecoes_preservadas':True,'acoes_keyframes_cameras_preservados':True,'quadros_verificados':360,'animacao_sha256':before_animation,'reabertura_verificada':True,'marcadores':before_markers,'materiais':changes,'iluminacao':lighting,'imagens':images,'render':{'resolucao':[1920,1200],'fps':24,'frames':[1,360],'motor':'Cycles','amostras':128,'formato':'MP4/H.264','saida':'//render_final/AP2_IgorMariano.mp4'}}
               dump('validacao_final.json',report)
               print('AP2OF_PREPARADO_SEM_RENDER',FINAL,sha(FINAL))
