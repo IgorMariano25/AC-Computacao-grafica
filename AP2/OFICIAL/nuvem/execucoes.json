@@ -1,0 +1,32 @@
+{
+  "ambiente": "GitHub Actions, runner hospedado ubuntu-22.04",
+  "blender": "4.5.3 LTS",
+  "blender_build": "67807e1800cc",
+  "distribuicao_sha256": "975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845",
+  "branch": "codex/ap2-oficial-cloud-20261114",
+  "inspecao": {
+    "status": "success",
+    "run_url": "https://github.com/IgorMariano25/AC-Computacao-grafica/actions/runs/43625377156",
+    "commit_entrada": "f534b84d43f524ad06fbf66e7a0da23c7cd66f33",
+    "objetos": 266,
+    "render_executado": false,
+    "comando": "$RUNNER_TEMP/blender-4.5.3-linux-x64/blender -b --factory-startup --disable-autoexec --python-exit-code 1 --python AP2/OFICIAL/scripts/inspecionar_nuvem.py"
+  },
+  "preparacao": {
+    "status": "success",
+    "run_url": "https://github.com/IgorMariano25/AC-Computacao-grafica/actions/runs/43626601049",
+    "commit_entrada": "da8065add228135388213aa1d699a31a44e9b872",
+    "commit_resultado": "f08793b4e37c3fd1ccc133337e77f909e8ad6e7e",
+    "comando": "$RUNNER_TEMP/blender-4.5.3-linux-x64/blender -b --factory-startup --disable-autoexec --python-exit-code 1 --python AP2/OFICIAL/scripts/preparar_oficial.py",
+    "render_executado": false,
+    "saida_sha256": "9b77c4f6ad4b1c4b0f3b2193c9e26cba1303d63a7111f8531187302c9739eb96"
+  },
+  "blender_local_executado": false,
+  "preparacao_intermediaria": {
+    "status": "success",
+    "run_url": "https://github.com/IgorMariano25/AC-Computacao-grafica/actions/runs/43626234469",
+    "commit_entrada": "9b5c1ed1b1e1a14901f8a3eeabfb10ef65089247",
+    "observacao": "Preservacao verificada; remapeamento de caminhos relativos corrigido na execucao final.",
+    "render_executado": false
+  }
+}

@@ -1,0 +1,20 @@
+AUDITÓRIO AP2 — MULTICÂMERA — Blender 4.5 LTS
+Abra Auditorio_AP2.blend: a animação já está pronta; não precisa executar o script.
+15 segundos, 24 fps, frames 1–360. NumPad 0: visão da câmera; Espaço: reproduzir.
+Em teclado sem NumPad: View > Cameras > Active Camera.
+Os marcadores da Timeline estão vinculados às câmeras; os cortes valem também para Render Animation.
+
+1–48: Camera_Principal — visão geral do palco (0–2 s)
+49–84: Camera_Plateia — plateia vista do palco (2–3,5 s)
+85–120: Camera_Pulpito — púlpito e acendimento do foco (3,5–5 s)
+121–174: Camera_Corte — mesa e salto completo do capelo (5–7,25 s)
+175–216: Camera_Corte — close do diploma abrindo (7,25–9 s)
+217–360: Camera_Principal — tela acende, marca sobe e plano final (9–15 s)
+Camera_Corte foi reposicionada dentro do auditório e usa duas poses com corte seco.
+A marca sobe entre 217 e 277; a tela acende de 217 a 242, visíveis no retorno ao palco.
+
+O script animacao_ap2.py está incluído externamente e no Text Editor do .blend.
+Foi verificado quadro a quadro o uso das câmeras e testada a reexecução do script sem deriva.
+As curvas e os materiais originais da logo foram preservados.
+As imagens são prévias de quadros representativos; não são um vídeo final.
+Para renderizar: Render > Render Animation (Ctrl+F12). Saída PNG em //render_ap2/frame_.

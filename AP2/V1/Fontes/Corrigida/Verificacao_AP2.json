@@ -1,0 +1,13 @@
+{
+  "blender": "4.5.3 LTS",
+  "cinco_nomes_ok": true,
+  "reexecucao_sem_deriva": true,
+  "arquivo_reaberto": true,
+  "frames": 360,
+  "fps": 24,
+  "objetos": 266,
+  "capelo_z_min": 1.4299999475479126,
+  "capelo_z_max": 3.9222664833068848,
+  "teto_z": 4.189497470855713,
+  "logos_originais_preservadas": true
+}
