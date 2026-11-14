@@ -2,11 +2,15 @@
   "status": "success",
   "ambiente": "GitHub Actions github-hosted ubuntu-22.04",
   "plataforma": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
-  "run_url": "https://github.com/IgorMariano25/AC-Computacao-grafica/actions/runs/43625377156",
-  "commit_entrada": "f534b84d43f524ad06fbf66e7a0da23c7cd66f33",
+  "run_url": "https://github.com/IgorMariano25/AC-Computacao-grafica/actions/runs/43626234469",
+  "commit_entrada": "9b5c1ed1b1e1a14901f8a3eeabfb10ef65089247",
   "render_executado": false,
   "arquivos": {
+    "AP2_IgorMariano.blend": "a2f7b16359f539f18b12be3f5efede99947b66c31f65b8d74af973807f7c661c",
+    "nuvem/registro_execucao.json": "e40a385e29cd2e1c2f48654a6ebe51824f7bd65ac093c5547a096e0010a709d7",
     "nuvem/log_inspecao.txt": "557b834d9c0dce3f8c896f6cebe1148f477ee49466a6b02809cf4ea3e7a2f207",
-    "nuvem/inspecao_base.json": "974b918dd72dddf4cfb6344aadb4066c58ed3489f0fe2e120516d2d2fdbd15df"
+    "nuvem/validacao_final.json": "5c1d99d9390ac3a440dd6a961bf8e4d8daff0e74128175ef68daeb5509584b85",
+    "nuvem/inspecao_base.json": "974b918dd72dddf4cfb6344aadb4066c58ed3489f0fe2e120516d2d2fdbd15df",
+    "nuvem/log_preparo.txt": "5467f6d5e590846ec25c0df749e6921480cd2d9599e21afdbdec009a7337350e"
   }
 }

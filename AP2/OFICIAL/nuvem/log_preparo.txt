@@ -1,0 +1,7 @@
+Info: Saved as "AP2_IgorMariano.blend"
+AP2OF_PREPARADO_SEM_RENDER /home/runner/work/AC-Computacao-grafica/AC-Computacao-grafica/AP2/OFICIAL/AP2_IgorMariano.blend a2f7b16359f539f18b12be3f5efede99947b66c31f65b8d74af973807f7c661c
+Blender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:38:15)
+Read blend: "/home/runner/work/AC-Computacao-grafica/AC-Computacao-grafica/AP2/V1/Fontes/Auditorio_AP2.blend"
+Read blend: "/home/runner/work/AC-Computacao-grafica/AC-Computacao-grafica/AP2/OFICIAL/AP2_IgorMariano.blend"
+
+Blender quit
