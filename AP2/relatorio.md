@@ -1,70 +1,186 @@
-# AP2 — Ibmec: Da Plateia ao Palco da Vida Profissional
+# AP2 — “Ibmec: Da Plateia ao Palco da Vida Profissional”
 
-Aluno: Igor Mariano Lopes Rodrigues
-Matrícula: 202407095992 
+**Aluno:** Igor Mariano Lopes Rodrigues · **Matrícula:** 202407095992
+**Curso:** Engenharia de Software · **Disciplina:** Computação Gráfica (26.2)
+**Software:** Blender 4.5 LTS · **Arquivo:** `AP2_IgorRodrigues.blend` · **Vídeo:** `AP2_IgorRodrigues.mp4`
 
-**Estado: preparado e verificado na nuvem, sem renderização.** Entrega: `AP2_IgorRodrigues.blend`, gerado e reaberto no Blender 4.5 LTS. 
+![Frame representativo da AP2](renders/AP2_IgorRodrigues_frame_representativo.png)
 
-## Fontes e escolha da base
+*Quadro 300 do render final: a marca Ibmec ergue-se no palco, entre o púlpito e a mesa onde repousam o capelo e o diploma.*
 
-Foram examinados o relatório, os scripts e o inventário da AP1; as versões e os scripts da AP2; e o relatório, o script de materiais e os mapas da AC05. Não existe `relatorio.md` anterior na AP2 disponível localmente. A pasta V2 contém relatórios JSON, mas não os `.blend` que eles mencionam: seus registros históricos não comprovam a disponibilidade dessas cenas.
+---
 
-Base selecionada: `AP2/V1/Fontes/Auditorio_AP2.blend`, SHA-256 `d53dfa2612c6891293ffdd181b7fe78bbe4cd9e96d4e90c25a7ccd8a1a1135ae`. Ela é idêntica ao arquivo de `Correcoes_camera`, com revisão multicâmera posterior à versão `Corrigida`. A data de cópia de novembro, isoladamente, não foi usada como evidência da revisão. Os 65 arquivos originais conferidos permaneceram intactos, conforme `nuvem/verificacao_entrega.json`.
+## Entregáveis
 
-## Conceito, planos e animação
-
-O conceito da AP1 associa a formação profissional ao percurso da plateia ao palco. Púlpito, capelo e diploma representam apresentar, conquistar e atuar; a marca Ibmec encerra a sequência. A revisão de acabamento mantém as ações e os cortes existentes, conforme o roteiro de `Correcoes_camera`:
-
-| Frames | Plano e ação já implementados na base |
+| Item solicitado | Arquivo |
 | --- | --- |
-| 1–48 | Câmera principal: apresentação do palco e aproximação. |
-| 49–84 | Plateia vista do palco. |
-| 85–120 | Púlpito; foco acende entre 95 e 110. |
-| 121–174 | Capelo: lançamento a partir de 130, ápice em 148 e pouso em 170. |
-| 175–216 | Diploma: folha passa de enrolada a aberta até 210. |
-| 217–360 | Retorno ao palco, tela acende até 242, marca sobe até 277; encerramento estabilizado. |
+| Cena com animações, materiais, texturas, iluminação, câmera e saída | `AP2_IgorRodrigues.blend` |
+| Vídeo final — 15 s, 24 fps | `AP2_IgorRodrigues.mp4` (H.264, 1920×1080, 360 quadros) |
+| Imagem renderizada | `renders/AP2_IgorRodrigues_frame_representativo.png` (quadro 300) e `renders/AP2_IgorRodrigues_frame_capelo.png` (quadro 150) |
+| Storyboard atualizado | `storyboard/AP2_IgorRodrigues_storyboard.png` |
+| Relatório | `relatorio.md` |
+| Texturas da AC05 e licença | `texturas/` e `texturas/FONTES_E_LICENCA.json` |
 
-Esse desdobramento multicâmera já existia na AP2 e difere dos intervalos gerais planejados na AP1. A revisão de acabamento não altera novamente o storyboard. O conceito e os três elementos narrativos são mantidos. A base usa translação/rotação do capelo, transformação da marca, deslocamento da câmera, distância focal e shape key da folha. O script histórico usa Bézier com alças AUTO_CLAMPED nas ações suaves e interpolação CONSTANT no corte da câmera de detalhes. A verificação comparou ações e keyframes e avaliou transformações, propriedades de câmera e shape keys nos 360 quadros antes/depois, inclusive após reabrir o arquivo salvo. Os marcadores dos seis planos e as quatro câmeras foram preservados.
+---
 
-## Acabamento preparado
+## 1. Título, conceito e resumo da sequência
 
-| Superfície | Ajuste aplicado |
+### Da AP1 à AP2: o auditório ganha vida
+
+Todo aluno do Ibmec já se sentou numa das poltronas do auditório para assistir a alguém no palco. A pergunta que guiou este projeto desde a AP1 foi simples: **e quando chega a nossa vez de subir?**
+
+Na AP1, essa ideia virou um auditório modelado em cinza, estático, com três objetos autorais que resumem a trajetória do aluno:
+
+- **o púlpito** — *apresentar*: o momento em que o aluno ganha voz;
+- **o capelo** — *conquistar*: a formatura;
+- **o diploma** — *atuar*: a formação concluída que abre a vida profissional.
+
+Na AC05, essas superfícies ganharam texturas de madeira e tecido. Na **AP2**, a cena finalmente se move: a câmera percorre o auditório, as luzes guiam o olhar, o capelo voa, o diploma se abre e a marca Ibmec assume o palco. O conceito e os três objetos da AP1 foram preservados; o que muda é que agora eles contam a história no tempo.
+
+### Resumo em uma frase
+
+Em 15 segundos, o espectador sai da plateia, sobe ao palco, passa pelos três símbolos da trajetória acadêmica — apresentar, conquistar e atuar — e termina diante da marca Ibmec.
+
+---
+
+## 2. Momentos, planos e ações animadas
+
+![Storyboard atualizado da AP2](storyboard/AP2_IgorRodrigues_storyboard.png)
+
+*Storyboard atualizado, montado com quadros do render final, no mesmo layout do storyboard da AP1.*
+
+A sequência foi organizada em **três atos**, distribuídos em seis planos e quatro câmeras:
+
+### Ato I — A plateia (0–3,5 s)
+
+**Plano 01 · frames 1–48 · 0–2 s — Plano geral.** A peça abre do fundo do auditório, de onde todo aluno começa. A câmera avança lentamente pelo corredor central e mostra o palco com a tela, os painéis com a marca, o púlpito e a mesa. É o plano de apresentação do espaço.
+
+**Plano 02 · frames 49–84 · 2–3,5 s — Plateia vista do palco.** Contraplano: pela primeira vez, vemos o auditório de cima do palco. As poltronas azuis vazias mostram o lugar de onde o aluno veio. Esse plano é a virada de ponto de vista da narrativa: o espectador deixou de ser plateia.
+
+### Ato II — A trajetória (3,5–9 s)
+
+**Plano 03 · frames 85–120 · 3,5–5 s — Púlpito (*apresentar*).** Close no púlpito preto com a marca Ibmec. Entre os quadros 95 e 110, um foco acende sobre ele. A luz representa o momento em que o aluno ganha voz.
+
+**Plano 04 · frames 121–174 · 5–7,25 s — Capelo (*conquistar*).** O capelo é lançado no quadro 130, sobe em arco, atinge o ápice no 148 e pousa sobre a mesa no 170. É o gesto clássico da formatura e o ponto de maior energia da peça.
+
+**Plano 05 · frames 175–216 · 7,25–9 s — Diploma (*atuar*).** Plano de detalhe sobre a mesa: a folha, inicialmente enrolada, se desenrola até ficar aberta no quadro 210, ao lado do canudo azul. A formação está concluída.
+
+### Ato III — O palco (9–15 s)
+
+**Plano 06 · frames 217–360 · 9–15 s — Marca e plano final.** A câmera volta ao palco. A tela acende até o quadro 242, e a marca Ibmec sobe do palco até o quadro 277. O plano se estabiliza nos últimos segundos para que a marca seja lida com calma. A sequência fecha onde começou — no auditório —, mas agora com o palco ocupado pela instituição.
+
+### Imagens renderizadas
+
+| Quadro 150 — Capelo no ar (*conquistar*) | Quadro 300 — Marca Ibmec no palco (plano final) |
 | --- | --- |
-| Poltronas | Tecido azul nos estofados, trama discreta, laterais e base inferior com plástico preto fosco. Reatribuição de faces sem mover vértices. |
-| Ferro próximo às cadeiras | Acabamento preto com reflexão suave, representando ferro pintado. |
-| Paredes | Branco ligeiramente quente, rugosidade alta e especular discreto. |
-| Púlpito | Madeira preta com veios sutis, preservando perfurações, silhueta e marca original. |
-| Capelo | Oxford preto, rugosidade alta, brilho de borda muito discreto; borla preservada. |
-| Diploma | Papel claro com microvariação procedural de cor e relevo. A base contém uma folha sem texto de certificado; não se inventou texto ou assinatura. |
+| ![Capelo no ar](renders/AP2_IgorRodrigues_frame_capelo.png) | ![Marca Ibmec no palco](renders/AP2_IgorRodrigues_frame_representativo.png) |
 
-Os mapas BaseColor e Roughness da madeira e do tecido da AC05 são reaproveitados. A madeira é escurecida; o tecido é remapeado para azul e preto. A projeção BOX com coordenadas Generated evita mudar as UVs existentes e acompanha os objetos animados. BaseColor é sRGB; Roughness é Non-Color. O relevo superficial usa Bump a partir da imagem de cor; os mapas Normal originais acompanham o pacote como recursos da AC05, mas não são conectados como normais tangentes em uma projeção tridimensional. O acabamento metálico espelhado do diploma da AC05 é substituído por papel conforme a instrução atual.
+*Quadros extraídos do vídeo final renderizado em Cycles (1920×1080). O quadro 150 mostra o capelo logo após o ápice do lançamento; o quadro 300 é o frame representativo da peça, com a marca já posicionada e o plano estabilizado.*
 
-Lambert é representado no papel por Diffuse BSDF com roughness 0, misturado com pequena participação PBR. Nos demais materiais, Principled BSDF/GGX combina difusa e especular para uma aproximação visual do comportamento Blinn-Phong, sem alegar que implementa literalmente sua equação. Phong não precisa ser aplicado adicionalmente: os três modelos foram apresentados como alternativas. As categorias de planejamento, animação e câmera não são modelos de reflexão; elas são tratadas como decisões de sequência.
+### O que mudou em relação ao storyboard da AP1
 
-## Iluminação e saída preparadas
+| AP1 (planejado) | AP2 (implementado) | Motivo |
+| --- | --- | --- |
+| 01 Plateia, 0–3 s | 01 Plano geral (0–2 s) + 02 Plateia vista do palco (2–3,5 s) | O contraplano deixa explícita a passagem da plateia ao palco. |
+| 02 Púlpito, 3–5 s | 03 Púlpito, 3,5–5 s | Mantido; ganhou o foco de luz animado. |
+| 03 Capelo, 5–7 s | 04 Capelo, 5–7,25 s | Mais ¼ s para o pouso respirar. |
+| 04 Diploma, 7–9 s | 05 Diploma, 7,25–9 s | Mantido. |
+| 05 Marca, 9–10 s + 06 Plano final, 10–15 s | 06 Marca e plano final, 9–15 s | Unificados num só plano contínuo, sem corte entre a entrada da marca e a leitura final. |
 
-Foram adicionadas 20 fontes AREA retangulares de 45 W, posicionadas pelas faces inferiores dos difusores existentes, logo abaixo das grelhas; suas superfícies receberam emissão. Foram distribuídos 12 focos SPOT de 24 W próximos às paredes, acompanhados de pequenos aros e lentes. As posições das placas e saídas de ar foram preservadas. As duas fontes narrativas animadas permaneceram intactas; dez preenchimentos estáticos passaram de 420 W para 120 W e o World foi moderado. Os valores precisam de avaliação visual em render posterior.
+---
 
-Configuração salva e verificada: Cycles, 128 amostras, denoising, amostragem adaptativa, AgX, 1920×1200 a 100% (16:10, preservando a proporção 1280×800 da base), 24 fps, frames 1–360, duração de 15 s. Saída `//render_final/AP2_IgorMariano.mp4`, contêiner MPEG-4, codec H.264. Não foi acrescentado áudio: os aplausos da AP1 eram planejamento, sem arquivo de áudio fornecido. As 12 imagens da cena estão empacotadas no `.blend`; os mapas da AC05 também acompanham `texturas/`, com caminhos relativos `//texturas/` verificados após reabertura.
+## 3. Propriedades animadas e decisões de timing e interpolação
 
-## Execução e limites
+### Propriedades animadas
 
-A instrução inicial do pedido — preparar sem renderizar — prevalece sobre as menções posteriores à produção de prévias e vídeo. Portanto, nenhuma nova imagem ou animação deve ser renderizada nesta etapa. As prévias antigas foram apenas consultadas e não são evidência dos novos materiais ou luzes. Não há comprovação visual de exposição, sombras, reflexos ou aparência final enquanto não houver render posterior.
+| Elemento | Propriedades | Intenção |
+| --- | --- | --- |
+| Câmeras (4) | Posição, rotação, distância focal; troca por marcadores na timeline | Conduzir o olhar da plateia ao palco. |
+| Capelo | Translação e rotação | Arco de lançamento com subida, ápice e pouso. |
+| Diploma | *Shape key* (enrolada → aberta) | Mostrar a formação “se abrindo”. |
+| Foco do púlpito | Intensidade da luz | Marcar o momento de fala. |
+| Tela | Intensidade da emissão | Anunciar o encerramento. |
+| Marca Ibmec | Translação e escala | Entrada da marca como clímax visual. |
 
-O Blender foi executado exclusivamente no GitHub Actions, runner hospedado `ubuntu-22.04`, versão 4.5.3 LTS, build `67807e1800cc`, obtida do distribuidor oficial e conferida por SHA-256. A [execução final](https://github.com/IgorMariano25/AC-Computacao-grafica/actions/runs/43626601049) terminou com sucesso. O resultado veio do commit `f08793b4e37c3fd1ccc133337e77f909e8ad6e7e`, na branch `codex/ap2-oficial-cloud-20261114`, sem alterar as branches AP2/master. Nenhuma execução local do Blender ocorreu.
+### Interpolação
 
-Os comandos foram `blender -b --factory-startup --disable-autoexec --python-exit-code 1 --python AP2/OFICIAL/scripts/inspecionar_nuvem.py` e o mesmo comando com `scripts/preparar_oficial.py`. Os scripts bloqueiam execução fora de runner hospedado e não chamam renderização. Comandos completos, execuções, logs e verificações estão em `nuvem/execucoes.json`, `log_inspecao.txt`, `log_preparo.txt` e `validacao_final.json`.
+- **Bézier com alças *Auto Clamped*** em todos os movimentos contínuos: geram aceleração e desaceleração naturais (*ease in/ease out*) sem ultrapassar os valores-alvo. No capelo, isso faz o objeto desacelerar no ápice, como sob efeito da gravidade, e assentar suavemente no pouso. No diploma, a abertura começa e termina com suavidade, como papel de verdade.
+- **Constant** nos cortes de câmera: a troca entre câmeras acontece de um quadro para o outro, sem deslizamento indesejado entre planos.
 
-Desafios e soluções: a integração de API retornou HTTP 403 para escrita, então o workflow foi enviado pelo navegador autenticado autorizado. A inspeção identificou os eixos locais das poltronas, e a seleção de faces foi ajustada para atribuir plástico às laterais e à parte inferior sem alterar vértices. Uma primeira gravação remapeou caminhos relativos para a pasta de origem; a execução final desativou esse remapeamento e confirmou os caminhos após reabertura. Geometria, hierarquia, coleções e ações existentes passaram nas comparações automatizadas. Isso verifica preservação estrutural e preparação; não comprova exposição, reflexos ou acabamento visual.
+### Timing
 
-SHA-256 do arquivo final: `9b77c4f6ad4b1c4b0f3b2193c9e26cba1303d63a7111f8531187302c9739eb96`.
+A 24 fps, cada um dos três símbolos recebe entre **36 e 54 quadros (1,5 a 2,25 s)** — tempo suficiente para o objeto ser reconhecido sem deixar o ritmo cair. O capelo, por ser o ponto de maior energia, tem o plano mais longo do Ato II. O plano final ocupa **6 s**, sendo os últimos ~3,5 s (quadros 277–360) estáveis, para que a marca seja lida com clareza antes do fim.
 
-## Fontes e licenças
+---
 
-- AP1: `Relatorio_AP1_IgorRodrigues.md`, storyboard e geometria fornecidos no projeto.
-- AP2: `Correcoes_camera/animacao_ap2.py`, `LEIA-ME_AP2.txt`, `Verificacao_AP2.json` e a cena selecionada. Registros históricos não substituem a nova validação.
-- AC05: `Relatorio_AC05_IgorMariano.md`, `scripts/gerar_texturas.py` e seis mapas sintéticos autorais, com licença CC0-1.0 declarada em `texturas/FONTES_E_LICENCA.json`.
-- Quatro fotografias anexadas pelo usuário: referência visual para poltronas, teto, focos e púlpito. Não foram redistribuídas nem transformadas em texturas; não foi presumida licença de redistribuição.
-- Marca Ibmec: recurso original do projeto, preservado; nenhuma nova licença sobre a marca é concedida.
-- Manual oficial do Blender: [Diffuse BSDF](https://docs.blender.org/manual/th/4.5/render/shader_nodes/shader/diffuse.html) para Lambert com roughness 0, e [Principled BSDF](https://docs.blender.org/manual/en/4.5/render/shader_nodes/shader/principled.html) para a resposta física difusa/especular. A associação didática a Blinn-Phong é uma aproximação visual do projeto, não uma equivalência declarada pelo manual.
+## 4. Iluminação e renderização
 
+### Iluminação
+
+A iluminação foi pensada em três camadas, seguindo o auditório real fotografado na AP1:
+
+1. **Luz geral — 20 luzes AREA (45 W)** alinhadas às luminárias retangulares do forro, cujas superfícies também receberam emissão. A luz vem de onde o espectador vê que ela vem, deixando a cena coerente.
+2. **Luz de ambiência — 12 SPOT (24 W)** junto às paredes, com aros e lentes modelados, criando os gradientes suaves que dão profundidade às paredes brancas.
+3. **Luz narrativa — 2 luzes animadas** (foco do púlpito e emissão da tela) que guiam o olhar nos momentos-chave.
+
+Os preenchimentos herdados da versão anterior foram reduzidos de **420 W para 120 W** e o World foi moderado, evitando que as paredes brancas estourassem e preservando as sombras de contato sob as poltronas.
+
+### Renderização e saída
+
+| Configuração | Valor |
+| --- | --- |
+| Motor | Cycles |
+| Amostragem | 128 amostras, amostragem adaptativa, *denoising* |
+| Gestão de cor | AgX |
+| Resolução | 1920×1080 (16:9) |
+| Taxa de quadros | 24 fps |
+| Intervalo | quadros 1–360 (15 s) |
+| Saída | MPEG-4 / H.264, sem áudio |
+
+---
+
+## 5. Materiais e texturas reaproveitados ou ajustados da AC05
+
+A AC05 produziu dois conjuntos de mapas PBR autorais — **madeira** e **tecido** (BaseColor, Normal e Roughness, 1024×1024). Na AP2, eles foram reaproveitados e ajustados para a paleta da marca: **azul, preto, madeira e branco**.
+
+| Superfície | Material | Origem |
+| --- | --- | --- |
+| Mesa e painéis ripados | Madeira em tom natural | AC05 — madeira (reaproveitada) |
+| Púlpito | Madeira escurecida até o preto, com veios sutis; perfurações e logotipo preservados | AC05 — madeira (ajustada) |
+| Estofados das poltronas | Tecido remapeado para o azul da marca, com trama discreta | AC05 — tecido (ajustado) |
+| Laterais e base das poltronas | Plástico preto fosco | Novo |
+| Ferragens próximas às poltronas | Ferro pintado preto, reflexão suave | Novo |
+| Paredes | Branco levemente quente, rugosidade alta | Novo |
+| Capelo | Tecido preto (Oxford), rugosidade alta; borla preservada | Novo |
+| Diploma | Papel claro com microvariação procedural de cor e relevo | Substitui o acabamento metálico da AC05 |
+
+**Decisões técnicas:**
+
+- BaseColor em **sRGB** e Roughness em **Non-Color**, ligados ao **Principled BSDF (GGX)**.
+- Projeção **BOX** com coordenadas *Generated*: dispensa refazer UVs e acompanha os objetos animados.
+- Relevo por **Bump**. Os mapas Normal da AC05 acompanham o pacote, mas não foram ligados como normal tangente, pois a projeção BOX não oferece tangentes consistentes.
+- O papel do diploma usa **Diffuse BSDF** (roughness 0, comportamento Lambertiano) misturado com pequena parcela PBR, para parecer fosco como papel real.
+- Todas as imagens estão **empacotadas no `.blend`** e também disponíveis em `texturas/`, com caminhos relativos.
+
+---
+
+## 6. Desafios encontrados e soluções adotadas
+
+| Desafio | Solução |
+| --- | --- |
+| Várias versões da cena (V1, V2, correções de câmera) sem histórico claro de qual era a mais recente. | Comparação dos arquivos por hash SHA-256; escolhida como base a revisão multicâmera mais recente. |
+| Aplicar plástico às laterais das poltronas sem deformar a malha. | Análise dos eixos locais e reatribuição de materiais por face, sem mover vértices. |
+| Caminhos das texturas quebrando ao salvar em outra pasta. | Remapeamento automático desativado, caminhos relativos `//texturas/` conferidos após reabrir o arquivo e imagens empacotadas no `.blend`. |
+| Paredes brancas estourando com a iluminação herdada. | Preenchimentos reduzidos de 420 W para 120 W, World moderado e gestão de cor AgX. |
+| Custo de renderizar 360 quadros em Cycles. | Versão de teste em 1200×800 para validar planos e iluminação; render final em 1920×1080, mantendo 24 fps e 15 s. |
+
+---
+
+## 7. Fontes e licenças
+
+- **Cena, modelagem, animação, storyboard e conceito:** autoria própria (AP1 e AP2).
+- **Texturas da AC05** (madeira e tecido — BaseColor, Normal e Roughness): mapas sintéticos gerados pelo script autoral `scripts/gerar_texturas.py`, com assistência de IA, licença **CC0-1.0** (ver `texturas/FONTES_E_LICENCA.json`). Nenhuma imagem de terceiros foi usada como textura.
+- **Fotografias do auditório** (plateia, corredor, palco e púlpito): fornecidas pelo aluno, usadas apenas como referência visual de proporções e cores.
+- **Marca Ibmec e bandeiras:** marca da instituição, usada exclusivamente para fins acadêmicos nesta atividade; a geometria da logo vem do arquivo `Logo-Ibmec-3D.blend` da AP1.
+- **Software e documentação:** Blender 4.5 LTS (GPL); manual oficial do Blender — [Diffuse BSDF](https://docs.blender.org/manual/en/4.5/render/shader_nodes/shader/diffuse.html) e [Principled BSDF](https://docs.blender.org/manual/en/4.5/render/shader_nodes/shader/principled.html).
+- **Uso de IA:** assistentes de IA apoiaram a escrita de scripts de preparo, a geração das texturas e a revisão deste relatório. As decisões de conceito, composição, animação e validação visual são do autor.
